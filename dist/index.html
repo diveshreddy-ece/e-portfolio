@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Divesh Reddy | Engineer · Creator · Builder</title>
+  <meta name="description" content="Divesh Reddy — Electronics & Communication Engineering student exploring RTL design, VLSI, embedded systems, leadership and visual storytelling.">
+  <meta name="theme-color" content="#050309">
+
+  <!-- Typography & Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Sora:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&family=Roboto+Flex:opsz,wght@8..144,300..1000&display=swap" rel="stylesheet">
+
+  <!-- Generated Tailwind CSS -->
+
+  <!-- 3D Spline Web Component -->
+  <script type="module" src="https://unpkg.com/@splinetool/viewer@1.9.59/build/spline-viewer.js"></script>
+
+  <!-- Modular Stylesheets -->
+  <script type="module" crossorigin src="/assets/index-CIWo4mWZ.js"></script>
+  <link rel="stylesheet" crossorigin href="/assets/index-B3_JZxEN.css">
+</head>
+<body class="relative min-h-screen">
+<!-- Halftone Nebula Background -->
+<canvas id="nebula-bg" aria-hidden="true" style="position:fixed;inset:0;width:100%;height:100%;z-index:0;pointer-events:none;display:block;"></canvas>
+
+<a href="#main" class="skip-link">Skip to content</a>
+
+<!-- Scroll progress -->
+<div class="fixed top-0 left-0 right-0 h-[3px] z-[60] bg-transparent">
+  <div id="scroll-progress" class="h-full bg-gradient-to-r from-vlsi-500 via-lead-500 to-vid-500"></div>
+</div>
+
+<!-- Navbar -->
+<header id="site-header" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300 backdrop-blur-xl border-b" style="background:rgba(5,3,9,0.80);border-color:rgba(246,226,232,0.10);">
+  <div class="max-w-7xl mx-auto px-5 sm:px-6 flex items-center justify-between transition-all duration-300" id="nav-inner" style="height:84px;">
+    <a href="#home" class="font-bold tracking-tight text-lg shrink-0" style="color:var(--nebula-star);">Divesh Reddy</a>
+
+    <nav id="main-nav" class="hidden md:flex items-center gap-7 text-sm font-medium" style="color:rgba(246,226,232,0.65);" aria-label="Primary">
+      <a href="#about" class="nav-link hover:text-white transition" data-section="about"><span class="dot"></span>About</a>
+      <a href="#vlsi" class="nav-link hover:text-white transition" data-section="vlsi"><span class="dot"></span>VLSI</a>
+      <a href="#leadership" class="nav-link hover:text-white transition" data-section="leadership"><span class="dot"></span>Leadership</a>
+      <a href="#video" class="nav-link hover:text-white transition" data-section="video"><span class="dot"></span>Video</a>
+    </nav>
+
+    <div class="hidden md:flex items-center gap-3">
+      <details class="relative group">
+        <summary class="list-none cursor-pointer text-sm font-medium text-slate-700 hover:text-navy-900 px-3 py-2 transition">Resumes</summary>
+        <div class="absolute right-0 top-full mt-2 w-56 rounded-xl border border-slate-200 bg-white p-2 shadow-xl">
+          <a href="assets/resume-rtl-design.pdf" download class="block rounded-lg px-3 py-2.5 text-sm text-slate-700 hover:bg-slate-50">RTL Design Resume</a>
+          <a href="assets/resume-graphic-design.pdf" download class="block rounded-lg px-3 py-2.5 text-sm text-slate-700 hover:bg-slate-50">Graphic Design Resume</a>
+        </div>
+      </details>
+      <a href="#contact" class="liquid-metal-btn liquid-metal-btn--nav" aria-label="Let's Talk"><span>Let's Talk</span><span class="liquid-metal-btn__arrow" aria-hidden="true">↗</span></a>
+    </div>
+
+    <button id="menu-btn" aria-expanded="false" aria-controls="mobile-menu" aria-label="Open menu" class="md:hidden p-2 rounded-lg border border-slate-200 text-slate-700">
+      <svg id="menu-icon-open" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+      <svg id="menu-icon-close" class="w-5 h-5 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+    </button>
+  </div>
+
+  <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-navy-900/10 px-6 py-6 space-y-1">
+    <a href="#vlsi" class="block py-3 text-slate-700 font-medium text-lg border-b border-slate-100">VLSI</a>
+    <a href="#leadership" class="block py-3 text-slate-700 font-medium text-lg border-b border-slate-100">Leadership</a>
+    <a href="#video" class="block py-3 text-slate-700 font-medium text-lg border-b border-slate-100">Video</a>
+    <a href="#about" class="block py-3 text-slate-700 font-medium text-lg border-b border-slate-100">About</a>
+    <a href="#contact" class="block py-3 text-slate-700 font-medium text-lg border-b border-slate-100">Contact</a>
+    <div class="pt-4 flex gap-3">
+      <div class="flex-1 grid grid-cols-1 gap-2">
+        <a href="assets/resume-rtl-design.pdf" download class="text-center py-3 rounded-full border border-slate-200 font-medium text-slate-700">RTL Resume</a>
+        <a href="assets/resume-graphic-design.pdf" download class="text-center py-3 rounded-full border border-slate-200 font-medium text-slate-700">Graphic Resume</a>
+      </div>
+      <a href="#contact" class="liquid-metal-btn liquid-metal-btn--mobile flex-1" aria-label="Let's Talk"><span>Let's Talk</span><span class="liquid-metal-btn__arrow" aria-hidden="true">↗</span></a>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+
+  <!-- HERO -->
+  <section id="home" class="relative pt-40 pb-24 sm:pt-48 sm:pb-32 overflow-hidden">
+    <div class="grid-field absolute inset-0 z-0 pointer-events-none" aria-hidden="true"></div>
+    <div class="relative z-10 max-w-7xl mx-auto px-5 sm:px-6 grid grid-cols-1 lg:grid-cols-12 gap-8 xl:gap-12 items-center">
+
+      <div class="lg:col-span-7 space-y-7">
+        <div class="inline-flex items-center gap-2 text-[11px] font-mono font-semibold uppercase tracking-widest text-navy-900/70 bg-white px-3.5 py-1.5 rounded-full border border-navy-900/10 shadow-sm">
+          <span>ECE STUDENT</span><span class="text-vlsi-500">•</span><span class="text-vlsi-600">VLSI</span><span class="text-slate-300">•</span><span class="text-lead-600">LEADERSHIP</span><span class="text-slate-300">•</span><span class="text-vid-600">VIDEO</span>
+        </div>
+
+        <h1 id="hero-proximity-title" class="hero-proximity-title text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-navy-900 leading-[1.1]" aria-label="I build digital systems, lead technical communities, and turn ideas into visual stories.">
+          I build digital systems, lead technical communities, and turn ideas into visual stories.
+        </h1>
+
+        <p class="text-lg text-slate-600 max-w-xl leading-relaxed">
+          I'm an Electronics &amp; Communication Engineering student developing skills in VLSI and digital design, while leading technical communities and working in video editing on the side.
+        </p>
+        <div class="portfolio-kicker mt-3">Open to internships · collaborations · creative projects</div>
+
+        <div class="flex flex-wrap items-center gap-3 pt-2">
+          <button type="button" id="explore-me-trigger" aria-haspopup="dialog" aria-controls="explore-me-dialog"
+            class="explore-me-button inline-flex items-center gap-3 px-7 py-4 rounded-full text-white text-sm font-semibold shadow-xl">
+            <span>Explore Me</span><span class="explore-me-arrow" aria-hidden="true">↗</span>
+          </button>
+          <span class="text-xs font-mono text-slate-500">Choose a side of my work to explore</span>
+        </div>
+
+        <div class="flex flex-wrap gap-4 pt-1">
+          <a href="assets/resume-rtl-design.pdf" download class="inline-flex items-center gap-2 text-sm font-semibold text-navy-900 border-b-2 border-navy-900/20 hover:border-navy-900 pb-0.5 transition">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v2a2 2 0 002 2h12a2 2 0 002-2v-2M7 10l5 5 5-5M12 15V3"/></svg>
+            RTL Design Resume
+          </a>
+          <a href="assets/resume-graphic-design.pdf" download class="inline-flex items-center gap-2 text-sm font-semibold text-navy-900 border-b-2 border-navy-900/20 hover:border-navy-900 pb-0.5 transition">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v2a2 2 0 002 2h12a2 2 0 002-2v-2M7 10l5 5 5-5M12 15V3"/></svg>
+            Graphic Design Resume
+          </a>
+        </div>
+      </div>
+
+      <div class="lg:col-span-5 relative">
+        <div class="lanyard-stage relative mx-auto w-full max-w-[470px] h-[610px] sm:h-[680px]" aria-label="Interactive 3D ID card portrait. Drag to swing the card and click to flip it.">
+          <div id="lanyard-root" class="lanyard-root"></div>
+          <div class="lanyard-hint" aria-hidden="true">TRY DRAGGING</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about" class="py-20 sm:py-28 lg:py-32 border-t border-navy-900/10">
+    <div class="max-w-7xl mx-auto px-5 sm:px-6">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center">
+        <!-- Left Column: Bio & Info Cards -->
+        <div class="lg:col-span-7 space-y-8 reveal">
+          <div class="space-y-4">
+            <span class="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-sky-400 font-mono">
+              <span class="w-2 h-2 rounded-full bg-sky-400 animate-pulse"></span>
+              About Me
+            </span>
+            <h2 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight">Who I am</h2>
+            <p class="text-slate-300 text-base sm:text-lg leading-relaxed pt-2">
+              I'm an <span class="text-white font-medium">Electronics &amp; Communication Engineering</span> student interested in <span class="text-sky-300 font-medium">VLSI, RTL and digital design</span>, leadership, and visual storytelling.
+            </p>
+            <p class="text-slate-300 text-base sm:text-lg leading-relaxed">
+              I move between waveform viewers, event logistics, and video timelines — treating each as a different way of shaping something complex into something clear.
+            </p>
+            <div class="pt-4 border-t border-slate-700/60">
+              <p class="text-slate-400 text-sm sm:text-base leading-relaxed">
+                <span class="font-semibold text-slate-200">Beyond engineering:</span> football, content creation, and technology.
+              </p>
+            </div>
+          </div>
+
+          <!-- Info Cards (2x2 grid) -->
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2">
+            <div class="card p-5 sm:p-6 reveal hover:border-sky-500/40 transition-colors">
+              <div class="text-[11px] font-mono uppercase tracking-widest text-sky-400 font-semibold mb-2">Education</div>
+              <div class="text-slate-100 font-semibold text-base">Manav Rachna University</div>
+            </div>
+            <div class="card p-5 sm:p-6 reveal hover:border-sky-500/40 transition-colors" style="transition-delay:.05s">
+              <div class="text-[11px] font-mono uppercase tracking-widest text-sky-400 font-semibold mb-2">Focus</div>
+              <div class="text-slate-100 font-semibold text-base">VLSI • RTL • Digital Design</div>
+            </div>
+            <div class="card p-5 sm:p-6 reveal hover:border-purple-500/40 transition-colors" style="transition-delay:.1s">
+              <div class="text-[11px] font-mono uppercase tracking-widest text-purple-400 font-semibold mb-2">Leadership</div>
+              <div class="text-slate-100 font-semibold text-base">Coordinator — Digital Nexus</div>
+            </div>
+            <div class="card p-5 sm:p-6 reveal hover:border-pink-500/40 transition-colors" style="transition-delay:.15s">
+              <div class="text-[11px] font-mono uppercase tracking-widest text-pink-400 font-semibold mb-2">Creative</div>
+              <div class="text-slate-100 font-semibold text-base">Video Editing • Graphic Design</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right Column: Interactive 3D Robot -->
+        <div class="lg:col-span-5 flex items-center justify-center">
+          <div id="robot-container" class="relative w-full h-[460px] sm:h-[520px] lg:h-[580px] flex items-center justify-center">
+            <!-- Ambient blue glow behind robot -->
+            <div id="robot-glow" class="absolute inset-0 pointer-events-none" style="background: radial-gradient(ellipse 65% 55% at 50% 50%, rgba(14,165,233,0.18) 0%, rgba(14,165,233,0.05) 45%, transparent 72%); filter: blur(35px); z-index: 0;"></div>
+            <!-- Spline Scene -->
+            <div id="robot-scene" style="position: relative; z-index: 1; width: 100%; height: 100%;">
+              <spline-viewer
+                id="spline-robot"
+                loading-anim-type="none"
+                url="https://prod.spline.design/kZDDjO5HuC9GJUM2/scene.splinecode"
+                style="width: 100%; height: 100%; display: block;"
+              ></spline-viewer>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Quick stat pills across bottom -->
+      <div class="mt-14 sm:mt-16 grid grid-cols-2 sm:grid-cols-4 gap-4">
+        <div class="reveal text-center p-5 rounded-2xl bg-vlsi-500/10 border border-vlsi-500/20 hover:border-vlsi-500/40 transition-colors">
+          <svg class="w-5 h-5 mx-auto mb-2 text-sky-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+          <div class="text-xs font-semibold text-slate-200">Technical Projects</div>
+        </div>
+        <div class="reveal text-center p-5 rounded-2xl bg-purple-500/10 border border-purple-500/20 hover:border-purple-500/40 transition-colors" style="transition-delay:.05s">
+          <svg class="w-5 h-5 mx-auto mb-2 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/></svg>
+          <div class="text-xs font-semibold text-slate-200">Events Organized</div>
+        </div>
+        <div class="reveal text-center p-5 rounded-2xl bg-pink-500/10 border border-pink-500/20 hover:border-pink-500/40 transition-colors" style="transition-delay:.1s">
+          <svg class="w-5 h-5 mx-auto mb-2 text-pink-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"/></svg>
+          <div class="text-xs font-semibold text-slate-200">Video Projects</div>
+        </div>
+        <div class="reveal text-center p-5 rounded-2xl bg-slate-800/50 border border-slate-700/60 hover:border-slate-500/40 transition-colors" style="transition-delay:.15s">
+          <svg class="w-5 h-5 mx-auto mb-2 text-sky-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+          <div class="text-xs font-semibold text-slate-200">Current Focus: Digital IC Design</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- VLSI -->
+  <section id="vlsi" class="py-24 sm:py-32 border-t border-navy-900/10 bg-gradient-to-b from-vlsi-50/40 to-transparent">
+    <div class="max-w-7xl mx-auto px-5 sm:px-6">
+      <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-14 reveal">
+        <div>
+          <span class="text-xs font-bold uppercase tracking-widest text-vlsi-600 font-mono bg-vlsi-50 px-3 py-1 rounded-md border border-vlsi-100">VLSI &amp; Digital Design</span>
+          <h2 class="text-3xl sm:text-4xl font-bold text-navy-900 tracking-tight mt-3">From RTL intent to working hardware.</h2>
+        </div>
+        <p class="text-slate-600 text-sm max-w-md">RTL design, functional verification, and implementation flow — the discipline behind reliable digital hardware.</p>
+      </div>
+
+      <!-- Flow diagram -->
+      <div class="reveal mb-16 overflow-x-auto">
+        <svg viewBox="0 0 980 120" class="w-full min-w-[640px] h-28" id="vlsi-flow" fill="none">
+          <line x1="90" y1="60" x2="890" y2="60" stroke="rgba(255,31,90,0.28)" stroke-width="2"/>
+          <line id="flow-line" class="flow-line" x1="90" y1="60" x2="890" y2="60" stroke="#ff1f5a" stroke-width="2"/>
+          <g font-family="JetBrains Mono, monospace" font-size="12" fill="#f6e2e8">
+            <circle cx="90" cy="60" r="7" fill="#ff1f5a"/>
+            <text x="90" y="98" text-anchor="middle">RTL Design</text>
+            <circle cx="357" cy="60" r="7" fill="#ff1f5a"/>
+            <text x="357" y="98" text-anchor="middle">Verification</text>
+            <circle cx="624" cy="60" r="7" fill="#ff1f5a"/>
+            <text x="624" y="98" text-anchor="middle">Synthesis</text>
+            <circle cx="890" cy="60" r="7" fill="#ff1f5a"/>
+            <text x="890" y="98" text-anchor="middle">FPGA / Implementation</text>
+          </g>
+        </svg>
+      </div>
+
+      <!-- Discipline cards -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-16">
+        <article class="card glow-cyan p-7 space-y-3 reveal">
+          <div class="w-11 h-11 rounded-xl bg-vlsi-50 text-vlsi-600 flex items-center justify-center"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg></div>
+          <h3 class="font-bold text-navy-900">RTL Design</h3>
+          <p class="text-sm text-slate-600 leading-relaxed">Synthesizable Verilog / SystemVerilog built around clear module boundaries and readable state machines.</p>
+        </article>
+        <article class="card glow-cyan p-7 space-y-3 reveal" style="transition-delay:.05s">
+          <div class="w-11 h-11 rounded-xl bg-vlsi-50 text-vlsi-600 flex items-center justify-center"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 3c-3.183 0-6.073 1.24-8.22 3.263M3 6l1.5 4.5L9 9m12 9l-1.5-4.5L15 15"/></svg></div>
+          <h3 class="font-bold text-navy-900">Verification</h3>
+          <p class="text-sm text-slate-600 leading-relaxed">Testbenches and UVM environments that catch corner cases early, with coverage-driven closure.</p>
+        </article>
+        <article class="card glow-cyan p-7 space-y-3 reveal" style="transition-delay:.1s">
+          <div class="w-11 h-11 rounded-xl bg-vlsi-50 text-vlsi-600 flex items-center justify-center"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v18m-6-6l6 6 6-6M5 7h14"/></svg></div>
+          <h3 class="font-bold text-navy-900">Synthesis &amp; FPGA</h3>
+          <p class="text-sm text-slate-600 leading-relaxed">Taking verified RTL through synthesis and onto FPGA, with timing and resource use as real constraints.</p>
+        </article>
+      </div>
+
+      <!-- Projects -->
+      <div id="vlsi-projects" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+      <p class="text-xs text-slate-400 mt-6 font-mono">Waveform captures, RTL diagrams, and board photos to be added per project.</p>
+    </div>
+  </section>
+
+  <!-- LEADERSHIP -->
+  <section id="leadership" class="py-24 sm:py-32 border-t border-navy-900/10 bg-gradient-to-b from-lead-50/40 to-transparent">
+    <div class="max-w-7xl mx-auto px-5 sm:px-6">
+      <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-14 reveal">
+        <div>
+          <span class="text-xs font-bold uppercase tracking-widest text-lead-600 font-mono bg-lead-50 px-3 py-1 rounded-md border border-lead-100">Leadership &amp; Events</span>
+          <h2 class="text-3xl sm:text-4xl font-bold text-navy-900 tracking-tight mt-3">Building communities. Creating momentum.</h2>
+        </div>
+        <p class="text-slate-600 text-sm max-w-md">As Coordinator of <span class="font-semibold text-[#ff3366]">Digital Nexus</span>, I help organise technical events, workshops, and competitions for our student community.</p>
+      </div>
+
+      <!-- Timeline + Digital Nexus image -->
+      <div class="leadership-timeline-layout grid grid-cols-1 lg:grid-cols-[minmax(0,1.35fr)_minmax(280px,.65fr)] gap-10 lg:gap-14 items-center mb-16">
+        <div class="relative pl-8 sm:pl-10">
+          <div class="absolute left-[7px] sm:left-[9px] top-2 bottom-2 w-px bg-lead-200"></div>
+          <div class="space-y-10" id="leadership-timeline"></div>
+        </div>
+
+        <div class="flex justify-center lg:justify-end">
+          <div class="w-full max-w-[390px] rounded-3xl overflow-hidden bg-navy-900/5 border border-lead-100 shadow-[0_20px_60px_rgba(12,35,64,.12)]">
+            <img
+              src="https://res.cloudinary.com/dmnxhbzke/image/upload/v1788691857/WhatsApp_Image_2025-08-22_at_23.16.10_epim4b.jpg"
+              alt="Digital Nexus club"
+              class="block w-full aspect-square object-cover"
+              loading="lazy"
+            >
+          </div>
+        </div>
+      </div>
+
+      <!-- Impact -->
+      <div class="mb-16">
+        <h3 class="text-sm font-bold uppercase tracking-widest text-navy-900/60 font-mono mb-5">What I actually did</h3>
+        <div class="flex flex-wrap gap-3">
+          <span class="px-4 py-2 rounded-full bg-lead-50 border border-lead-100 text-lead-700 text-sm font-medium">Planning</span>
+          <span class="px-4 py-2 rounded-full bg-lead-50 border border-lead-100 text-lead-700 text-sm font-medium">Team Coordination</span>
+          <span class="px-4 py-2 rounded-full bg-lead-50 border border-lead-100 text-lead-700 text-sm font-medium">Event Execution</span>
+          <span class="px-4 py-2 rounded-full bg-lead-50 border border-lead-100 text-lead-700 text-sm font-medium">Promotion</span>
+          <span class="px-4 py-2 rounded-full bg-lead-50 border border-lead-100 text-lead-700 text-sm font-medium">Technical Workshops</span>
+          <span class="px-4 py-2 rounded-full bg-lead-50 border border-lead-100 text-lead-700 text-sm font-medium">Community Building</span>
+        </div>
+      </div>
+
+      <!-- Animated event photo stack (vanilla JS version; keeps the existing HTML site lightweight) -->
+      <div class="event-gallery-wrap reveal">
+        <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-3 mb-6">
+          <div>
+            <h3 class="text-sm font-bold uppercase tracking-widest text-[#ff7098] font-mono mb-2">Event Gallery</h3>
+            <p class="text-sm text-slate-400">A few moments from building the Digital Nexus community.</p>
+          </div>
+          <span class="text-xs font-mono text-slate-500">01 / 06 · DIGITAL NEXUS</span>
+        </div>
+        <div class="event-showcase">
+          <div class="event-photo-stage" aria-live="polite">
+            <div class="event-photo-card event-photo-back event-photo-back-two" aria-hidden="true"></div>
+            <div class="event-photo-card event-photo-back event-photo-back-one" aria-hidden="true"></div>
+            <div class="event-photo-card event-photo-active" id="event-photo-active">
+              <img src="https://res.cloudinary.com/dmnxhbzke/image/upload/v1788691857/WhatsApp_Image_2025-08-22_at_23.16.10_epim4b.jpg" alt="Digital Nexus student community" loading="lazy">
+              <div class="event-photo-overlay"><span class="event-photo-kicker">COMMUNITY MOMENTS</span><strong id="event-photo-title">Digital Nexus</strong></div>
+            </div>
+          </div>
+          <div class="event-copy-panel">
+            <div class="event-counter" id="event-counter">01 <span>/ 06</span></div>
+            <h4 id="event-title">Digital Nexus</h4>
+            <p id="event-description">Working together to organise technical events, workshops and creative opportunities for the student community.</p>
+            <div class="event-gallery-controls">
+              <button type="button" id="event-prev" aria-label="Previous event photo">←</button>
+              <button type="button" id="event-next" aria-label="Next event photo">→</button>
+            </div>
+            <p class="event-gallery-note" id="event-gallery-note">More event photos can be added to complete this gallery.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- VIDEO -->
+  <section id="video" class="py-24 sm:py-32 border-t border-navy-900/10 bg-navy-950 text-white relative overflow-hidden">
+    <div class="absolute inset-0 opacity-40" style="background: radial-gradient(circle at 15% 20%, rgba(192,38,211,0.18), transparent 40%), radial-gradient(circle at 85% 75%, rgba(14,165,233,0.12), transparent 40%);"></div>
+    <div class="max-w-7xl mx-auto px-5 sm:px-6 relative">
+      <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12 reveal">
+        <div>
+          <span class="text-xs font-bold uppercase tracking-widest text-vid-300 font-mono bg-vid-500/10 px-3 py-1 rounded-md border border-vid-500/30">Video Editing</span>
+          <h2 class="text-3xl sm:text-4xl font-bold tracking-tight mt-3">Stories built to stay with you.</h2>
+        </div>
+        <p class="text-slate-300 text-sm max-w-md">A featured edit showcasing pacing, storytelling, and visual editing.</p>
+      </div>
+
+      <!-- Featured Video -->
+      <div class="reveal rounded-3xl overflow-hidden relative border border-white/10 bg-black shadow-2xl">
+        <div class="featured-hover-video" style="position:relative; width:100%; overflow:visible;">
+        <video class="portfolio-featured-video" data-src="https://res.cloudinary.com/dmnxhbzke/video/upload/q_auto:good,w_960/v1788689336/If_it_looks_easy_that_means_you_didn_t_see_the_nights_behind_it._a2m6ei.mp4" data-poster="https://res.cloudinary.com/dmnxhbzke/video/upload/so_0,w_960,q_auto,f_jpg/v1788689336/If_it_looks_easy_that_means_you_didn_t_see_the_nights_behind_it._a2m6ei.jpg" muted loop playsinline preload="none"
+               style="display:block; width:100%; border-radius:20px; transition:transform .25s ease, box-shadow .25s ease; transform-origin:center;"
+               aria-label="Featured video"></video>
+        <span class="featured-sound-hint" style="position:absolute; left:16px; bottom:16px; padding:7px 10px; border-radius:999px; background:rgba(0,0,0,.72); color:#fff; font-size:12px; pointer-events:none;">🔇 Hover for sound · Click if needed</span>
+      </div>
+      </div>
+    <div style="margin-top:36px;">
+      <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:20px;">
+        <article class="video-card" style="position:relative; border-radius:20px; overflow:hidden; background:#111; border:1px solid rgba(255,255,255,.08);">
+        <div class="hover-video-wrap" style="position:relative; width:100%; aspect-ratio:16/9; overflow:visible;">
+          <video class="portfolio-hover-video" data-src="https://res.cloudinary.com/dmnxhbzke/video/upload/q_auto:good,w_640/v1788688815/Elevate_yourself_The_secret_Finding_your_perfect_hobby_mix._q85iti.mp4" data-poster="https://res.cloudinary.com/dmnxhbzke/video/upload/so_0,w_640,q_auto,f_jpg/v1788688815/Elevate_yourself_The_secret_Finding_your_perfect_hobby_mix._q85iti.jpg" muted loop playsinline preload="none"
+                 style="display:block; width:100%; height:100%; object-fit:cover; transition:transform .25s ease, box-shadow .25s ease; transform-origin:center; position:relative;"
+                 aria-label="Elevate Yourself video"></video>
+          <span class="sound-hint" style="position:absolute; left:12px; bottom:12px; padding:6px 9px; border-radius:999px; background:rgba(0,0,0,.7); color:#fff; font-size:12px; pointer-events:none;">🔇 Hover for sound</span>
+        </div>
+        <div style="padding:14px 16px;">
+          <h3 style="margin:0; font-size:1rem;">Elevate Yourself</h3>
+        </div>
+      </article>
+<article class="video-card" style="position:relative; border-radius:20px; overflow:hidden; background:#111; border:1px solid rgba(255,255,255,.08);">
+        <div class="hover-video-wrap" style="position:relative; width:100%; aspect-ratio:16/9; overflow:visible;">
+          <video class="portfolio-hover-video" data-src="https://res.cloudinary.com/dmnxhbzke/video/upload/q_auto:good,w_640/v1788688816/Video-95457_snmdby.mp4" data-poster="https://res.cloudinary.com/dmnxhbzke/video/upload/so_0,w_640,q_auto,f_jpg/v1788688816/Video-95457_snmdby.jpg" muted loop playsinline preload="none"
+                 style="display:block; width:100%; height:100%; object-fit:cover; transition:transform .25s ease, box-shadow .25s ease; transform-origin:center; position:relative;"
+                 aria-label="Video Edit video"></video>
+          <span class="sound-hint" style="position:absolute; left:12px; bottom:12px; padding:6px 9px; border-radius:999px; background:rgba(0,0,0,.7); color:#fff; font-size:12px; pointer-events:none;">🔇 Hover for sound</span>
+        </div>
+        <div style="padding:14px 16px;">
+          <h3 style="margin:0; font-size:1rem;">Video Edit</h3>
+        </div>
+      </article>
+<article class="video-card" style="position:relative; border-radius:20px; overflow:hidden; background:#111; border:1px solid rgba(255,255,255,.08);">
+        <div class="hover-video-wrap" style="position:relative; width:100%; aspect-ratio:16/9; overflow:visible;">
+          <video class="portfolio-hover-video" data-src="https://res.cloudinary.com/dmnxhbzke/video/upload/q_auto:good,w_640/v1788688816/Sir_Lewis_Hamilton_hamilton_f1_us4cnm.mp4" data-poster="https://res.cloudinary.com/dmnxhbzke/video/upload/so_0,w_640,q_auto,f_jpg/v1788688816/Sir_Lewis_Hamilton_hamilton_f1_us4cnm.jpg" muted loop playsinline preload="none"
+                 style="display:block; width:100%; height:100%; object-fit:cover; transition:transform .25s ease, box-shadow .25s ease; transform-origin:center; position:relative;"
+                 aria-label="Sir Lewis Hamilton video"></video>
+          <span class="sound-hint" style="position:absolute; left:12px; bottom:12px; padding:6px 9px; border-radius:999px; background:rgba(0,0,0,.7); color:#fff; font-size:12px; pointer-events:none;">🔇 Hover for sound</span>
+        </div>
+        <div style="padding:14px 16px;">
+          <h3 style="margin:0; font-size:1rem;">Sir Lewis Hamilton</h3>
+        </div>
+      </article>
+<article class="video-card" style="position:relative; border-radius:20px; overflow:hidden; background:#111; border:1px solid rgba(255,255,255,.08);">
+        <div class="hover-video-wrap" style="position:relative; width:100%; aspect-ratio:16/9; overflow:visible;">
+          <video class="portfolio-hover-video" data-src="https://res.cloudinary.com/dmnxhbzke/video/upload/q_auto:good,w_640/v1788688816/Mad_Maxxx_maxverstappen1_f1_worldchampionship_wdc_gd9bi1.mp4" data-poster="https://res.cloudinary.com/dmnxhbzke/video/upload/so_0,w_640,q_auto,f_jpg/v1788688816/Mad_Maxxx_maxverstappen1_f1_worldchampionship_wdc_gd9bi1.jpg" muted loop playsinline preload="none"
+                 style="display:block; width:100%; height:100%; object-fit:cover; transition:transform .25s ease, box-shadow .25s ease; transform-origin:center; position:relative;"
+                 aria-label="Mad Maxxx video"></video>
+          <span class="sound-hint" style="position:absolute; left:12px; bottom:12px; padding:6px 9px; border-radius:999px; background:rgba(0,0,0,.7); color:#fff; font-size:12px; pointer-events:none;">🔇 Hover for sound</span>
+        </div>
+        <div style="padding:14px 16px;">
+          <h3 style="margin:0; font-size:1rem;">Mad Maxxx</h3>
+        </div>
+      </article>
+<article class="video-card" style="position:relative; border-radius:20px; overflow:hidden; background:#111; border:1px solid rgba(255,255,255,.08);">
+        <div class="hover-video-wrap" style="position:relative; width:100%; aspect-ratio:16/9; overflow:visible;">
+          <video class="portfolio-hover-video" data-src="https://res.cloudinary.com/dmnxhbzke/video/upload/q_auto:good,w_640/v1788691572/Video-83524_gwegy6.mp4" data-poster="https://res.cloudinary.com/dmnxhbzke/video/upload/so_0,w_640,q_auto,f_jpg/v1788691572/Video-83524_gwegy6.jpg" muted loop playsinline preload="none"
+                 style="display:block; width:100%; height:100%; object-fit:cover; transition:transform .25s ease, box-shadow .25s ease; transform-origin:center; position:relative;"
+                 aria-label="El Clásico video"></video>
+          <span class="sound-hint" style="position:absolute; left:12px; bottom:12px; padding:6px 9px; border-radius:999px; background:rgba(0,0,0,.7); color:#fff; font-size:12px; pointer-events:none;">🔇 Hover for sound</span>
+        </div>
+        <div style="padding:14px 16px;">
+          <h3 style="margin:0; font-size:1rem;">El Clásico</h3>
+        </div>
+      </article>
+      </div>
+    </div>
+
+    </div>
+  </section>
+
+
+
+
+  <!-- CONTACT -->
+  <section id="contact" class="py-24 sm:py-32 border-t border-navy-900/10">
+    <div class="max-w-4xl mx-auto px-5 sm:px-6 text-center reveal">
+      <span class="text-xs font-bold uppercase tracking-widest text-navy-900/60 font-mono">Let's Connect</span>
+      <h2 class="text-3xl sm:text-4xl font-bold text-navy-900 tracking-tight mt-3 mb-5">Let's work together.</h2>
+      <p class="text-slate-600 max-w-xl mx-auto leading-relaxed mb-10">
+        Reach out for VLSI collaboration, internships, technical projects, events, video editing, or any creative collaboration.
+      </p>
+
+      <div class="flex flex-wrap justify-center gap-3 mb-8">
+        <a href="mailto:diveshreddy699@gmail.com" class="liquid-metal-btn liquid-metal-btn--contact" aria-label="Email Divesh">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+          Email Me
+        </a>
+        <a href="https://www.linkedin.com/in/sai-divesh-reddy-karri-33384a27a/" target="_blank" rel="noopener noreferrer" class="liquid-metal-btn liquid-metal-btn--contact" aria-label="Open LinkedIn profile">
+          <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.03-3.04-1.85-3.04-1.86 0-2.15 1.45-2.15 2.94v5.67H9.33V8.98h3.41v1.57h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.29zM5.31 7.41a2.07 2.07 0 110-4.14 2.07 2.07 0 010 4.14zm1.78 13.04H3.53V8.98h3.56v11.47z"/></svg>
+          LinkedIn
+        </a>
+        <a href="https://github.com/diveshreddy-ece" target="_blank" rel="noopener noreferrer" class="liquid-metal-btn liquid-metal-btn--contact" aria-label="Open GitHub profile">
+          <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.58 2 12.23c0 4.52 2.87 8.35 6.84 9.7.5.1.68-.22.68-.49v-1.89c-2.78.62-3.37-1.2-3.37-1.2-.46-1.18-1.11-1.49-1.11-1.49-.91-.64.07-.63.07-.63 1 .07 1.53 1.06 1.53 1.06.9 1.56 2.35 1.11 2.92.85.09-.67.35-1.11.64-1.37-2.22-.26-4.56-1.14-4.56-5.06 0-1.12.39-2.03 1.03-2.75-.1-.26-.45-1.31.1-2.73 0 0 .84-.28 2.75 1.05A9.2 9.2 0 0112 6.45c.85 0 1.7.12 2.5.34 1.91-1.33 2.75-1.05 2.75-1.05.55 1.42.2 2.47.1 2.73.64.72 1.03 1.63 1.03 2.75 0 3.93-2.35 4.8-4.58 5.05.36.32.68.93.68 1.88v2.79c0 .27.18.6.69.49A10.25 10.25 0 0022 12.23C22 6.58 17.52 2 12 2z"/></svg>
+          GitHub
+        </a>
+      </div>
+
+      <p class="text-sm text-slate-400 font-mono">diveshreddy699@gmail.com</p>
+    </div>
+  </section>
+</main>
+
+<footer class="border-t border-navy-900/10 bg-white py-14">
+  <div class="max-w-7xl mx-auto px-5 sm:px-6 grid grid-cols-1 sm:grid-cols-3 gap-8 items-start">
+    <div>
+      <div class="font-bold text-navy-900 text-lg">Divesh Reddy</div>
+      <div class="text-xs font-mono uppercase tracking-widest text-slate-400 mt-1">VLSI • Leadership • Video Editing</div>
+    </div>
+    <div class="flex flex-wrap gap-x-6 gap-y-2 text-sm text-slate-600">
+      <a href="#vlsi" class="hover:text-navy-900 transition">VLSI</a>
+      <a href="#leadership" class="hover:text-navy-900 transition">Leadership</a>
+      <a href="#video" class="hover:text-navy-900 transition">Video</a>
+      <a href="#about" class="hover:text-navy-900 transition">About</a>
+      <a href="#contact" class="hover:text-navy-900 transition">Contact</a>
+    </div>
+    <div class="flex sm:justify-end gap-4 text-sm text-slate-600">
+      <a href="https://www.linkedin.com/in/sai-divesh-reddy-karri-33384a27a/" target="_blank" rel="noopener noreferrer" class="hover:text-navy-900 transition">LinkedIn</a>
+      <a href="https://github.com/diveshreddy-ece" target="_blank" rel="noopener noreferrer" class="hover:text-navy-900 transition">GitHub</a>
+      <a href="mailto:diveshreddy699@gmail.com" class="hover:text-navy-900 transition">Email</a>
+    </div>
+  </div>
+  <div class="max-w-7xl mx-auto px-5 sm:px-6 mt-10 pt-6 border-t border-slate-100 text-xs text-slate-400">
+    © 2026 Divesh Reddy
+  </div>
+</footer>
+
+<!-- Back to top -->
+<button id="back-to-top" aria-label="Back to top" class="fixed bottom-6 right-6 z-40 w-11 h-11 rounded-full bg-navy-900 text-white shadow-lg flex items-center justify-center opacity-0 pointer-events-none translate-y-3 transition-all duration-300 hover:bg-vlsi-600">
+  <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7"/></svg>
+</button>
+
+<!-- Project modal -->
+<dialog id="project-modal" aria-labelledby="modal-title">
+  <div class="min-h-full flex items-start sm:items-center justify-center p-4 sm:p-8">
+    <div class="bg-white rounded-3xl max-w-2xl w-full max-h-[85vh] overflow-y-auto shadow-2xl">
+      <div class="sticky top-0 bg-white flex items-center justify-between p-6 border-b border-slate-100">
+        <div class="flex flex-wrap gap-2" id="modal-tags"></div>
+        <button id="modal-close" aria-label="Close project details" class="w-9 h-9 rounded-full hover:bg-slate-100 flex items-center justify-center shrink-0 ml-4">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+        </button>
+      </div>
+      <div class="p-6 sm:p-8 space-y-6">
+        <h3 id="modal-title" class="text-2xl font-bold text-navy-900"></h3>
+        <div id="modal-body" class="space-y-5 text-sm leading-relaxed text-slate-600"></div>
+        <div class="flex gap-3 pt-2" id="modal-links"></div>
+      </div>
+    </div>
+  </div>
+</dialog>
+
+<!-- Custom section-aware cursor: IC chip in VLSI, network glyph in Leadership, play icon in Video -->
+<div id="custom-cursor" aria-hidden="true" data-mode="default">
+  <div class="ring"></div>
+  <svg class="glyph glyph--vlsi" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#ff1f5a" stroke-width="1.8">
+    <rect x="7" y="7" width="10" height="10" rx="1.5"/>
+    <path d="M9 7V4M15 7V4M9 20v-3M15 20v-3M7 9H4M7 15H4M20 9h-3M20 15h-3" stroke-linecap="round"/>
+  </svg>
+  <svg class="glyph glyph--leadership" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#d08aff" stroke-width="1.8">
+    <path stroke-linecap="round" stroke-linejoin="round" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"/>
+  </svg>
+  <svg class="glyph glyph--video" width="15" height="15" viewBox="0 0 24 24" fill="#ff1f5a">
+    <path d="M8 5v14l11-7z"/>
+  </svg>
+</div>
+
+<!-- Explore Me Categorical Dialog -->
+<dialog id="explore-me-dialog" aria-labelledby="explore-me-title"><div class="explore-dialog-shell">
+  <button type="button" class="explore-close" id="explore-me-close" aria-label="Close">×</button>
+  <div class="explore-eyebrow">A little bit of everything</div><h2 class="explore-heading" id="explore-me-title">What would you like to explore?</h2>
+  <p class="explore-subheading">Pick an interest and jump straight into that part of my journey.</p>
+  <div class="explore-folder-stage">
+    <button type="button" class="explore-choice" data-choice="vlsi" data-target="#vlsi">⌁ &nbsp; VLSI / RTL</button>
+    <button type="button" class="explore-choice" data-choice="events" data-target="#leadership">✳ &nbsp; Events &amp; Leadership</button>
+    <button type="button" class="explore-choice" data-choice="video" data-target="#video">▶ &nbsp; Video Editing</button>
+    <div class="explore-folder" aria-hidden="true"><div class="explore-folder-front"><span class="explore-folder-label">Explore Divesh</span><span class="explore-folder-hint">CHOOSE YOUR PATH</span></div></div>
+  </div><div class="explore-dialog-foot">Select one of the floating paths</div>
+</div></dialog>
+
+<!-- Modular JavaScript Architecture -->
+<script src="js/data/portfolio-data.js"></script>
+<script src="js/cursor.js"></script>
+<script src="js/ui.js"></script>
+<script src="js/projects.js"></script>
+<script src="js/leadership.js"></script>
+<script src="js/video.js"></script>
+<script src="js/event-gallery.js"></script>
+<script src="js/explore.js"></script>
+<script src="js/hero-proximity.js"></script>
+
+<!-- 3D Interactive Lanyard (React 18 & Three.js CDN) -->
+<script src="https://unpkg.com/react@18/umd/react.production.min.js" crossorigin></script>
+<script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js" crossorigin></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.min.js"></script>
+<script src="js/lanyard.js"></script>
+
+<!-- 3D Spline Robot Controller -->
+<script src="js/robot.js"></script>
+
+<!-- Halftone Nebula WebGL2 Background Shader -->
+<script src="js/nebula-bg.js"></script>
+
+</body>
+</html>

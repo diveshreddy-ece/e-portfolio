@@ -1,0 +1,214 @@
+/* ── Halftone Nebula Color Theme Overhaul ── */
+
+:root {
+  color-scheme: dark;
+  --nebula-void:        #050309;
+  --nebula-deep:        #080612;
+  --nebula-haze:        #161a38;
+  --nebula-card:        rgba(14, 5, 18, 0.72);
+  --nebula-card-hover:  rgba(28, 8, 28, 0.85);
+  --nebula-dusk:        #3b1646;
+  --nebula-wine:        #5c0d31;
+  --nebula-crimson:     #c01245;
+  --nebula-hot:         #ff1f5a;
+  --nebula-star:        #f6e2e8;
+  --nebula-stardim:     rgba(246, 226, 232, 0.75);
+  --nebula-muted:       rgba(246, 226, 232, 0.55);
+  --nebula-line:        rgba(255, 31, 90, 0.14);
+  --nebula-line2:       rgba(255, 31, 90, 0.24);
+  --nebula-glow:        rgba(192, 18, 69, 0.45);
+
+  --bg:                 #050309;
+  --panel:              rgba(14, 5, 18, 0.72);
+  --panel-2:            rgba(28, 8, 28, 0.85);
+  --line:               rgba(255, 31, 90, 0.18);
+  --ink:                #f6e2e8;
+  --muted:              rgba(246, 226, 232, 0.65);
+  --cyan:               #ff1f5a;
+  --violet:             #c01245;
+  --pink:               #ff7098;
+}
+
+* {
+  --tw-ring-color: rgba(255, 31, 90, 0.4) !important;
+}
+
+/* ── Global Background & Body Texture ── */
+body {
+  background-color: var(--nebula-void) !important;
+  color: var(--nebula-star) !important;
+}
+
+body:before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  opacity: 0.24;
+  background-image:
+    linear-gradient(rgba(255, 31, 90, 0.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 31, 90, 0.06) 1px, transparent 1px);
+  background-size: 52px 52px;
+  mask-image: linear-gradient(to bottom, black, transparent 78%);
+}
+
+@media (max-width: 767px) {
+  body:before {
+    background-size: 38px 38px;
+  }
+}
+
+section {
+  background: transparent !important;
+}
+
+#home {
+  min-height: 720px;
+}
+
+@media (max-width: 767px) {
+  #home {
+    min-height: auto;
+  }
+  #home h1 {
+    font-size: clamp(2.5rem, 11vw, 4rem);
+  }
+}
+
+#home h1:after {
+  content: "";
+  display: block;
+  width: 104px;
+  height: 4px;
+  margin-top: 24px;
+  border-radius: 9px;
+  background: linear-gradient(90deg, var(--cyan), var(--violet), var(--pink));
+}
+
+#home .inline-flex.items-center.gap-2.text-\[11px\] {
+  background: rgba(255, 31, 90, 0.12) !important;
+  border-color: rgba(255, 31, 90, 0.28) !important;
+  color: #ff9ebd !important;
+}
+
+#home img {
+  filter: saturate(0.95);
+  transition: transform 0.7s cubic-bezier(0.2, 0.8, 0.2, 1), filter 0.7s;
+}
+
+#home img:hover {
+  transform: scale(1.035);
+  filter: saturate(1.1);
+}
+
+#home .rounded-\[2rem\] {
+  border-color: rgba(255, 70, 130, 0.32) !important;
+  box-shadow: 0 28px 90px rgba(0, 0, 0, 0.5), 0 0 55px rgba(192, 18, 69, 0.22) !important;
+}
+
+video {
+  background: #050309;
+}
+
+#contact {
+  background: radial-gradient(ellipse at center, rgba(192, 18, 69, 0.15), transparent 65%) !important;
+}
+
+/* ── Discipline Icons & Skill Chips ── */
+.bg-vlsi-50,
+.w-11.h-11.rounded-xl.bg-vlsi-50,
+.bg-lead-50,
+.bg-vid-50 {
+  background: rgba(255, 31, 90, 0.14) !important;
+  border-color: rgba(255, 31, 90, 0.35) !important;
+  color: #ff3366 !important;
+  box-shadow: 0 0 16px rgba(255, 31, 90, 0.22) !important;
+}
+
+.border-vlsi-100,
+.border-lead-100,
+.border-vid-100 {
+  border-color: rgba(255, 31, 90, 0.28) !important;
+}
+
+.text-vlsi-700 { color: #ff9ebc !important; }
+.text-vlsi-600 { color: #ff7098 !important; }
+.text-vlsi-500 { color: #ff1f5a !important; }
+
+/* ── High Contrast Nebula Typography ── */
+.text-navy-900,
+.text-slate-800,
+.text-slate-700,
+.text-slate-100,
+.text-white {
+  color: #ffffff !important;
+}
+
+.text-slate-600,
+.text-slate-500,
+.text-navy-900\/60,
+.text-navy-900\/70 {
+  color: rgba(246, 226, 232, 0.75) !important;
+}
+
+.text-slate-400 {
+  color: rgba(246, 226, 232, 0.55) !important;
+}
+
+.text-slate-200 {
+  color: rgba(246, 226, 232, 0.90) !important;
+}
+
+.text-slate-300 {
+  color: rgba(246, 226, 232, 0.78) !important;
+}
+
+p {
+  color: var(--muted);
+}
+
+.border-slate-100,
+.border-slate-200,
+.border-navy-900\/10,
+.border-t {
+  border-color: rgba(255, 31, 90, 0.15) !important;
+}
+
+.bg-white {
+  background: rgba(14, 5, 18, 0.92) !important;
+}
+
+.bg-slate-50 {
+  background: rgba(28, 8, 28, 0.82) !important;
+}
+
+/* ── Quick Stat Pills ── */
+.bg-vlsi-500\/10,
+.bg-purple-500\/10,
+.bg-pink-500\/10,
+.bg-slate-800\/50 {
+  background: var(--nebula-card) !important;
+  border-color: rgba(255, 31, 90, 0.2) !important;
+}
+
+/* ── Silicon Flow Diagram SVG Overrides ── */
+#vlsi svg line#flow-line { stroke: #ff1f5a !important; }
+#vlsi svg line:not(#flow-line) { stroke: rgba(255, 31, 90, 0.2) !important; }
+#vlsi svg circle { fill: #ff1f5a !important; }
+#vlsi svg text { fill: #f6e2e8 !important; }
+#vlsi svg g text { fill: #f6e2e8 !important; }
+
+/* ── Footer ── */
+footer {
+  background: rgba(5, 3, 9, 0.9) !important;
+  border-color: rgba(255, 31, 90, 0.15) !important;
+}
+
+footer .border-t {
+  border-color: rgba(255, 31, 90, 0.1) !important;
+}
+
+footer a:hover {
+  color: #ffffff !important;
+}

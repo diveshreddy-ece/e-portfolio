@@ -1,0 +1,463 @@
+/* ── Explore Me Dialog, 3D Folder & Explorer Mode ── */
+
+/* ── Trigger Button ── */
+.explore-me-button {
+  background: linear-gradient(110deg, #3d051c 0%, #8c1040 48%, #c01245 85%, #ff1f5a 100%) !important;
+  border: 1px solid rgba(255, 70, 130, 0.45) !important;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.25s, box-shadow 0.25s;
+  box-shadow: 0 10px 25px rgba(192, 18, 69, 0.35) !important;
+  color: #ffffff !important;
+}
+
+.explore-me-button:before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  transform: translateX(-120%);
+  background: linear-gradient(105deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+  transition: transform 0.65s;
+}
+
+.explore-me-button:hover {
+  transform: translateY(-3px) scale(1.02) !important;
+  box-shadow: 0 18px 40px rgba(255, 31, 90, 0.5) !important;
+  border-color: #ff1f5a !important;
+}
+
+.explore-me-button:hover:before {
+  transform: translateX(120%);
+}
+
+.explore-me-arrow {
+  font-size: 18px;
+  transition: transform 0.25s;
+}
+
+.explore-me-button:hover .explore-me-arrow {
+  transform: translate(3px, -3px);
+}
+
+/* ── Dialog & Backdrop ── */
+#explore-me-dialog {
+  border: 0;
+  padding: 0;
+  background: transparent;
+  max-width: none;
+  max-height: none;
+  overflow: visible;
+  color: inherit;
+}
+
+#explore-me-dialog::backdrop {
+  background: rgba(3, 9, 22, 0.78);
+  backdrop-filter: blur(12px);
+  animation: explore-backdrop-in 0.25s ease both;
+}
+
+.explore-dialog-shell {
+  width: min(92vw, 720px);
+  min-height: 510px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 58px 28px 34px;
+  border: 1px solid rgba(255, 31, 90, 0.25) !important;
+  border-radius: 30px;
+  background: radial-gradient(ellipse at 50% 0%, rgba(192, 18, 69, 0.28), transparent 60%), linear-gradient(145deg, #090a18, #18081a 60%, #1c0f20) !important;
+  box-shadow: 0 35px 100px rgba(0, 0, 0, 0.7), 0 0 50px rgba(192, 18, 69, 0.25) !important;
+  overflow: hidden;
+}
+
+.explore-dialog-shell:before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(rgba(255, 31, 90, 0.18) 0.7px, transparent 0.7px);
+  background-size: 22px 22px;
+  opacity: 0.22;
+  mask-image: linear-gradient(to bottom, black, transparent 85%);
+  pointer-events: none;
+}
+
+.explore-close {
+  position: absolute;
+  top: 18px;
+  right: 18px;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  background: rgba(255, 255, 255, 0.06);
+  color: white;
+  font-size: 22px;
+  z-index: 4;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.2s;
+}
+
+.explore-close:hover {
+  background: rgba(255, 255, 255, 0.15);
+  transform: rotate(90deg);
+}
+
+.explore-eyebrow {
+  position: relative;
+  color: #ff7098;
+  font: 600 10px/1.4 ui-monospace, monospace;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+
+.explore-heading {
+  position: relative;
+  margin: 14px 0 10px;
+  color: #f8fafc;
+  font-size: clamp(25px, 5vw, 38px);
+  font-weight: 800;
+  letter-spacing: -0.04em;
+  text-align: center;
+  line-height: 1.12;
+  max-width: 620px;
+  z-index: 1;
+}
+
+.explore-subheading {
+  position: relative;
+  color: rgba(246, 226, 232, 0.65);
+  font-size: 14px;
+  text-align: center;
+  max-width: 460px;
+  line-height: 1.6;
+  z-index: 1;
+}
+
+/* ── 3D Folder & Floating Cards ── */
+.explore-folder-stage {
+  position: relative;
+  width: min(100%, 570px);
+  height: 270px;
+  margin-top: 34px;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  flex-shrink: 0;
+}
+
+.explore-folder {
+  position: relative;
+  width: 214px;
+  height: 142px;
+  border-radius: 17px 17px 19px 19px;
+  background: linear-gradient(145deg, #3b1646, #161a38) !important;
+  box-shadow: 0 24px 50px rgba(0, 0, 0, 0.4), inset 0 1px rgba(255, 255, 255, 0.16);
+  transform: perspective(700px) rotateX(5deg);
+  z-index: 2;
+}
+
+.explore-folder:before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: -13px;
+  width: 88px;
+  height: 23px;
+  border-radius: 12px 12px 0 0;
+  background: #3b1646 !important;
+}
+
+.explore-folder-front {
+  position: absolute;
+  inset: 29% 0 0;
+  border-radius: 13px 13px 17px 17px;
+  background: linear-gradient(155deg, #5c0d31, #24112e) !important;
+  border-top: 1px solid rgba(255, 31, 90, 0.35) !important;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  box-shadow: 0 -8px 24px rgba(0, 0, 0, 0.18);
+  transform-origin: 50% 100%;
+  transition: transform 1.15s cubic-bezier(0.22, 0.72, 0.24, 1);
+}
+
+.explore-folder-label {
+  font-weight: 700;
+  font-size: 14px;
+  letter-spacing: 0.01em;
+}
+
+.explore-folder-hint {
+  font: 10px ui-monospace, monospace;
+  color: #ff9ebc;
+  margin-top: 5px;
+  letter-spacing: 0.12em;
+}
+
+.explore-choice {
+  position: absolute;
+  left: 50%;
+  bottom: 96px;
+  z-index: 5;
+  opacity: 0;
+  pointer-events: none;
+  transform: translate(-50%, 42px) scale(0.7) rotate(var(--tilt));
+  padding: 12px 17px;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: 999px;
+  color: #f8fafc;
+  font-size: 13px;
+  font-weight: 700;
+  white-space: nowrap;
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.28);
+  transition: transform 1.15s cubic-bezier(0.22, 0.72, 0.24, 1), opacity 0.75s ease;
+  cursor: pointer;
+}
+
+.explore-choice[data-choice="vlsi"] {
+  --tilt: -5deg;
+  background: linear-gradient(110deg, #9f1239, #e11d48) !important;
+  border-color: rgba(255, 120, 160, 0.4) !important;
+}
+
+.explore-choice[data-choice="events"] {
+  --tilt: 4deg;
+  background: linear-gradient(110deg, #6d28d9, #9333ea) !important;
+  border-color: rgba(192, 132, 252, 0.4) !important;
+}
+
+.explore-choice[data-choice="video"] {
+  --tilt: -2deg;
+  background: linear-gradient(110deg, #be123c, #f43f5e) !important;
+  border-color: rgba(251, 113, 133, 0.4) !important;
+}
+
+#explore-me-dialog[open] .explore-folder-front {
+  transform: perspective(500px) rotateX(-34deg);
+}
+
+#explore-me-dialog[open] .explore-choice {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+#explore-me-dialog[open] .explore-choice[data-choice="vlsi"] {
+  transform: translate(calc(-50% - 145px), -100px) rotate(-5deg) scale(1);
+  animation: explore-float-in 1.25s cubic-bezier(0.22, 0.72, 0.24, 1) 0.2s both;
+}
+
+#explore-me-dialog[open] .explore-choice[data-choice="events"] {
+  transform: translate(calc(-50% + 5px), -135px) rotate(3deg) scale(1);
+  animation: explore-float-in 1.25s cubic-bezier(0.22, 0.72, 0.24, 1) 0.42s both;
+}
+
+#explore-me-dialog[open] .explore-choice[data-choice="video"] {
+  transform: translate(calc(-50% + 155px), -98px) rotate(5deg) scale(1);
+  animation: explore-float-in 1.25s cubic-bezier(0.22, 0.72, 0.24, 1) 0.64s both;
+}
+
+.explore-choice:hover {
+  filter: brightness(1.15);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+}
+
+.explore-dialog-foot {
+  position: relative;
+  margin-top: 12px;
+  color: rgba(246, 226, 232, 0.45);
+  font: 10px ui-monospace, monospace;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+@keyframes explore-backdrop-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes explore-float-in {
+  from {
+    opacity: 0;
+    filter: blur(5px);
+    transform: translate(0, 35px) scale(0.7);
+  }
+  to {
+    opacity: 1;
+    filter: blur(0);
+    transform: translate(0, 0) scale(1);
+  }
+}
+
+@media (max-width: 560px) {
+  .explore-dialog-shell {
+    min-height: 490px;
+    padding: 54px 14px 26px;
+    border-radius: 24px;
+  }
+  .explore-folder-stage {
+    height: 260px;
+    margin-top: 28px;
+  }
+  #explore-me-dialog[open] .explore-choice[data-choice="vlsi"] {
+    transform: translate(calc(-50% - 91px), -105px) rotate(-5deg) scale(0.92);
+  }
+  #explore-me-dialog[open] .explore-choice[data-choice="events"] {
+    transform: translate(-50%, -139px) rotate(2deg) scale(0.92);
+  }
+  #explore-me-dialog[open] .explore-choice[data-choice="video"] {
+    transform: translate(calc(-50% + 92px), -103px) rotate(5deg) scale(0.92);
+  }
+  .explore-choice {
+    font-size: 11px;
+    padding: 11px 12px;
+  }
+}
+
+/* ── Explore Section Animations ── */
+@keyframes explore-section-reveal {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ── Explorer Mode Toolbar / Backbar ── */
+.explore-backbar {
+  position: sticky !important;
+  top: 76px !important;
+  left: auto !important;
+  right: auto !important;
+  width: 100%;
+  min-height: 58px;
+  margin: 0 0 28px !important;
+  padding: 12px clamp(20px, 5vw, 64px) !important;
+  z-index: 80 !important;
+  background: rgba(5, 3, 9, 0.985) !important;
+  border-top: 1px solid rgba(255, 31, 90, 0.12);
+  border-bottom: 1px solid rgba(255, 31, 90, 0.18);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.18);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+@media (max-width: 640px) {
+  .explore-backbar {
+    top: 68px !important;
+    min-height: 50px;
+    padding: 9px 16px !important;
+    margin-bottom: 20px !important;
+  }
+}
+
+.explore-back-button,
+#explore-back-button {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 8px !important;
+  padding: 8px 18px !important;
+  border-radius: 999px !important;
+  background: rgba(30, 7, 24, 0.8) !important;
+  border: 1px solid rgba(255, 31, 90, 0.35) !important;
+  color: #f6e2e8 !important;
+  font-family: 'Inter', sans-serif !important;
+  font-size: 12.5px !important;
+  font-weight: 600 !important;
+  backdrop-filter: blur(12px) !important;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.35) !important;
+  transition: all 0.25s ease !important;
+  cursor: pointer !important;
+}
+
+.explore-back-button:hover,
+#explore-back-button:hover {
+  background: rgba(192, 18, 69, 0.35) !important;
+  border-color: #ff1f5a !important;
+  color: #ffffff !important;
+  box-shadow: 0 0 20px rgba(255, 31, 90, 0.45) !important;
+  transform: translateY(-2px) !important;
+}
+
+.explore-view-label {
+  font: 11px ui-monospace, monospace;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #ff9ebc;
+}
+
+#nav-inner .explore-backbar {
+  position: static !important;
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+  width: auto !important;
+  min-height: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  z-index: auto !important;
+}
+
+#nav-inner .explore-view-label {
+  display: none !important;
+}
+
+#nav-inner .explore-back-button {
+  padding: 9px 16px;
+  white-space: nowrap;
+  border-color: rgba(255, 31, 90, 0.35);
+  background: rgba(30, 8, 24, 0.5);
+  color: #f6e2e8;
+}
+
+#nav-inner .explore-back-button:hover {
+  background: rgba(192, 18, 69, 0.35);
+}
+
+@media (max-width: 767px) {
+  #nav-inner .explore-backbar {
+    order: 3;
+  }
+  #nav-inner {
+    gap: 10px;
+  }
+  #nav-inner .explore-back-button {
+    padding: 8px 11px;
+    font-size: 11px;
+  }
+}
+
+@keyframes explore-section-reveal {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .explore-me-button,
+  .explore-me-arrow,
+  .explore-folder-front,
+  .explore-choice {
+    transition: none !important;
+    animation: none !important;
+  }
+  #explore-me-dialog[open] .explore-choice {
+    animation: none;
+  }
+}

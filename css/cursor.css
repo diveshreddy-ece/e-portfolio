@@ -1,0 +1,158 @@
+/* ── Custom Section-Aware Cursor ── */
+
+body.custom-cursor-active {
+  cursor: none;
+}
+
+body.custom-cursor-active a,
+body.custom-cursor-active button,
+body.custom-cursor-active [role="button"] {
+  cursor: none;
+}
+
+#custom-cursor {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 9999;
+  pointer-events: none;
+  transform: translate(-50%, -50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.2s ease, width 0.25s cubic-bezier(0.16, 1, 0.3, 1), height 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  width: 22px;
+  height: 22px;
+}
+
+#custom-cursor.is-visible {
+  opacity: 1;
+}
+
+#custom-cursor .ring {
+  position: absolute;
+  inset: 0;
+  border-radius: 999px;
+  border: 1.5px solid rgba(255, 31, 90, 0.8) !important;
+  box-shadow: 0 0 12px rgba(255, 31, 90, 0.4) !important;
+  transition: border-color 0.25s ease, background 0.25s ease, transform 0.18s ease;
+}
+
+#custom-cursor.is-hover .ring {
+  transform: scale(1.35);
+  border-color: #ff1f5a !important;
+  background: rgba(255, 31, 90, 0.2) !important;
+  box-shadow: 0 0 22px rgba(255, 31, 90, 0.7) !important;
+}
+
+#custom-cursor .glyph {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transform: scale(0.5);
+  transition: opacity 0.22s ease, transform 0.22s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* Zone: VLSI */
+#custom-cursor[data-mode="vlsi"] {
+  width: 34px;
+  height: 34px;
+}
+
+#custom-cursor[data-mode="vlsi"] .ring {
+  border-color: #ff1f5a !important;
+  background: rgba(255, 31, 90, 0.18) !important;
+  box-shadow: 0 0 20px rgba(255, 31, 90, 0.6) !important;
+}
+
+#custom-cursor[data-mode="vlsi"] .glyph--vlsi {
+  opacity: 1;
+  transform: scale(1);
+}
+
+#custom-cursor[data-mode="vlsi"] .glyph--vlsi path,
+#custom-cursor[data-mode="vlsi"] .glyph--vlsi rect {
+  stroke: #ff1f5a !important;
+}
+
+/* Zone: Leadership */
+#custom-cursor[data-mode="leadership"] {
+  width: 34px;
+  height: 34px;
+}
+
+#custom-cursor[data-mode="leadership"] .ring {
+  border-color: #d08aff !important;
+  background: rgba(208, 138, 255, 0.18) !important;
+  box-shadow: 0 0 20px rgba(208, 138, 255, 0.6) !important;
+}
+
+#custom-cursor[data-mode="leadership"] .glyph--leadership {
+  opacity: 1;
+  transform: scale(1);
+}
+
+#custom-cursor[data-mode="leadership"] .glyph--leadership path {
+  stroke: #d08aff !important;
+}
+
+/* Zone: Video */
+#custom-cursor[data-mode="video"] {
+  width: 34px;
+  height: 34px;
+}
+
+#custom-cursor[data-mode="video"] .ring {
+  border-color: #ff1f5a !important;
+  background: rgba(255, 31, 90, 0.18) !important;
+  box-shadow: 0 0 20px rgba(255, 31, 90, 0.6) !important;
+}
+
+#custom-cursor[data-mode="video"] .glyph--video {
+  opacity: 1;
+  transform: scale(1);
+}
+
+#custom-cursor[data-mode="video"] .glyph--video path {
+  fill: #ff1f5a !important;
+}
+
+/* ── Modal & Top-Layer Cursor Overrides ── */
+dialog:modal,
+dialog[open],
+dialog:modal *,
+dialog[open] * {
+  cursor: auto !important;
+}
+
+dialog:modal button,
+dialog[open] button,
+dialog:modal a,
+dialog[open] a,
+dialog:modal [role="button"],
+dialog[open] [role="button"] {
+  cursor: pointer !important;
+}
+
+body.modal-open #custom-cursor,
+body.explore-dialog-active #custom-cursor {
+  display: none !important;
+}
+
+body.modal-open,
+body.explore-dialog-active {
+  cursor: auto !important;
+}
+
+/* Fallback for devices without hover or with coarse pointers */
+@media (prefers-reduced-motion: reduce), (hover: none), (pointer: coarse) {
+  #custom-cursor {
+    display: none !important;
+  }
+  body.custom-cursor-active {
+    cursor: auto !important;
+  }
+}
