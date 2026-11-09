@@ -160,6 +160,36 @@
     }
 
     var robotContainer = document.getElementById('robot-container');
+    var viewer = document.getElementById('spline-robot');
+    var splineLoadStarted = false;
+    function loadSplineViewer() {
+      if (splineLoadStarted || !viewer) return;
+      splineLoadStarted = true;
+      var script = document.createElement('script');
+      script.type = 'module';
+      script.src = 'https://unpkg.com/@splinetool/viewer@1.9.59/build/spline-viewer.js';
+      script.onload = function() {
+        var sceneUrl = viewer.getAttribute('data-scene-url');
+        if (sceneUrl) viewer.setAttribute('url', sceneUrl);
+      };
+      script.onerror = function() {
+        console.error('Unable to load the Spline viewer.');
+      };
+      document.head.appendChild(script);
+    }
+
+    if (robotContainer && viewer && 'IntersectionObserver' in window) {
+      var splineObserver = new IntersectionObserver(function(entries) {
+        if (entries.some(function(entry) { return entry.isIntersecting; })) {
+          loadSplineViewer();
+          splineObserver.disconnect();
+        }
+      });
+      splineObserver.observe(robotContainer);
+    } else {
+      loadSplineViewer();
+    }
+
     if ('IntersectionObserver' in window && robotContainer) {
       var visibilityObserver = new IntersectionObserver(updateVisibility);
       visibilityObserver.observe(robotContainer);

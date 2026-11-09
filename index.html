@@ -10,13 +10,11 @@
   <!-- Typography & Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Sora:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&family=Roboto+Flex:opsz,wght@8..144,300..1000&display=swap" rel="stylesheet">
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Sora:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&family=Roboto+Flex:opsz,wght@8..144,300..1000&display=optional" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Sora:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&family=Roboto+Flex:opsz,wght@8..144,300..1000&display=optional"></noscript>
 
   <!-- Generated Tailwind CSS -->
   <link rel="stylesheet" href="css/tailwind.generated.css">
-
-  <!-- 3D Spline Web Component -->
-  <script type="module" src="https://unpkg.com/@splinetool/viewer@1.9.59/build/spline-viewer.js"></script>
 
   <!-- Modular Stylesheets -->
   <link rel="stylesheet" href="css/typography.css">
@@ -190,7 +188,7 @@
               <spline-viewer
                 id="spline-robot"
                 loading-anim-type="none"
-                url="https://prod.spline.design/kZDDjO5HuC9GJUM2/scene.splinecode"
+                data-scene-url="https://prod.spline.design/kZDDjO5HuC9GJUM2/scene.splinecode"
                 style="width: 100%; height: 100%; display: block;"
               ></spline-viewer>
             </div>
@@ -543,27 +541,23 @@
 </div></dialog>
 
 <!-- Modular JavaScript Architecture -->
-<script src="js/data/portfolio-data.js"></script>
-<script src="js/cursor.js"></script>
-<script src="js/ui.js"></script>
-<script src="js/projects.js"></script>
-<script src="js/leadership.js"></script>
-<script src="js/video.js"></script>
-<script src="js/event-gallery.js"></script>
-<script src="js/explore.js"></script>
-<script src="js/hero-proximity.js"></script>
+<script defer src="js/data/portfolio-data.js"></script>
+<script defer src="js/cursor.js"></script>
+<script defer src="js/ui.js"></script>
+<script defer src="js/projects.js"></script>
+<script defer src="js/leadership.js"></script>
+<script defer src="js/video.js"></script>
+<script defer src="js/event-gallery.js"></script>
+<script defer src="js/explore.js"></script>
+<script defer src="js/hero-proximity.js"></script>
+<script defer src="js/robot.js"></script>
+<script defer src="js/nebula-bg.js"></script>
 
 <!-- 3D Interactive Lanyard (React 18 & Three.js CDN) -->
 <script src="https://unpkg.com/react@18/umd/react.production.min.js" crossorigin></script>
 <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js" crossorigin></script>
 <script src="https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.min.js"></script>
 <script src="js/lanyard.js"></script>
-
-<!-- 3D Spline Robot Controller -->
-<script src="js/robot.js"></script>
-
-<!-- Halftone Nebula WebGL2 Background Shader -->
-<script src="js/nebula-bg.js"></script>
 
 </body>
 </html>
