@@ -46,30 +46,40 @@
     const move=e=>{pointer.x=e.clientX;pointer.y=e.clientY;pointer.active=true;queue();};
     const leave=()=>{pointer.active=false;queue();};
     function queue(){if(!raf)raf=requestAnimationFrame(frame);}
+    // Centres are cached in document coordinates, so scrolling needs no re-measure
+    // (previously ~90 getBoundingClientRect calls per scroll event).
+    const applied=new Uint8Array(letters.length);
     function updateCenters(){
+      const sx=window.scrollX,sy=window.scrollY;
       for(let i=0;i<letters.length;i++){
         const r=letters[i].getBoundingClientRect();
-        centers[i*2]=r.left+r.width/2;
-        centers[i*2+1]=r.top+r.height/2;
+        centers[i*2]=r.left+r.width/2+sx;
+        centers[i*2+1]=r.top+r.height/2+sy;
       }
     }
     function frame(now){
       raf=0;const dt=last?Math.min(now-last,48):16;last=now;
       const ease=1-Math.exp(-dt/360);let active=false;
+      const px=pointer.x+window.scrollX,py=pointer.y+window.scrollY;
       for(let i=0;i<letters.length;i++){
         const el=letters[i];
-        const d=pointer.active?Math.hypot(pointer.x-centers[i*2],pointer.y-centers[i*2+1]):Infinity;
+        const d=pointer.active?Math.hypot(px-centers[i*2],py-centers[i*2+1]):Infinity;
         const t=Math.max(0,1-d/radius);
         const target=t*t*(3-2*t);
         values[i]+=(target-values[i])*ease;
         if(Math.abs(target-values[i])<.002)values[i]=target;
         const v=values[i];
         if(v===0){
-          el.style.removeProperty('transform');
-          el.style.removeProperty('color');
+          // Skip DOM writes for letters already at rest (pointer far from the title).
+          if(applied[i]){
+            el.style.removeProperty('transform');
+            el.style.removeProperty('color');
+            applied[i]=0;
+          }
         }else{
           el.style.transform=`translateY(${-v*.045}em) scale(${1+v*.04})`;
           el.style.color=`color-mix(in srgb, var(--nebula-star) ${Math.round((1-v*.22)*100)}%, #ff7098)`;
+          applied[i]=1;
         }
         if(v!==target)active=true;
       }
@@ -79,8 +89,9 @@
     window.addEventListener('pointermove',move,{passive:true});
     window.addEventListener('pointerout',e=>{if(!e.relatedTarget)leave();},{passive:true});
     window.addEventListener('blur',leave);
-    window.addEventListener('scroll',updateCenters,{passive:true});
     window.addEventListener('resize',updateCenters,{passive:true});
+    // Re-measure when the title reflows (font swap, wrapping changes).
+    if('ResizeObserver' in window)new ResizeObserver(updateCenters).observe(title);
     document.fonts?.ready.then(updateCenters);
   };
   if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init,{once:true});else init();

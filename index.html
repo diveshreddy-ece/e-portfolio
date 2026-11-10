@@ -10,6 +10,9 @@
   <!-- Typography & Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://unpkg.com" crossorigin>
+  <link rel="preconnect" href="https://cdn.jsdelivr.net">
+  <link rel="dns-prefetch" href="https://res.cloudinary.com">
   <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Sora:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&family=Roboto+Flex:opsz,wght@8..144,300..1000&display=optional" onload="this.onload=null;this.rel='stylesheet'">
   <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Sora:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&family=Roboto+Flex:opsz,wght@8..144,300..1000&display=optional"></noscript>
 
@@ -553,11 +556,27 @@
 <script defer src="js/robot.js"></script>
 <script defer src="js/nebula-bg.js"></script>
 
-<!-- 3D Interactive Lanyard (React 18 & Three.js CDN) -->
-<script src="https://unpkg.com/react@18/umd/react.production.min.js" crossorigin></script>
-<script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js" crossorigin></script>
-<script src="https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.min.js"></script>
-<script src="js/lanyard.js"></script>
+<!-- 3D Interactive Lanyard (React 18 & Three.js CDN)
+     Injected as ordered (async=false) scripts: they download in parallel and run
+     in this order, but no longer block parsing, first paint or DOMContentLoaded
+     (which the reveal/nav/video/gallery scripts wait on). Versions are pinned to
+     avoid the unpkg redirect hop. -->
+<script>
+  (function () {
+    [
+      ['https://unpkg.com/react@18.3.1/umd/react.production.min.js', true],
+      ['https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js', true],
+      ['https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.min.js', false],
+      ['js/lanyard.js', false]
+    ].forEach(function (entry) {
+      var script = document.createElement('script');
+      script.src = entry[0];
+      if (entry[1]) script.crossOrigin = 'anonymous';
+      script.async = false;
+      document.body.appendChild(script);
+    });
+  })();
+</script>
 
 </body>
 </html>

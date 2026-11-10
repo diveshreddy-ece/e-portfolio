@@ -932,6 +932,14 @@ const Lanyard = ({
     let hovering = false;
     let press = null;
     let imageToken = 0;
+    // Shaders (MeshPhysicalMaterial + foil) are compiled with compileAsync so the
+    // ~1s first-frame compile no longer blocks the main thread. Rendering and the
+    // physics loop wait for it; the fallback portrait stays visible meanwhile.
+    let compiled = typeof renderer.compileAsync !== 'function';
+    let hasFront = false;
+    const syncReady = () => {
+      container.classList.toggle('lanyard-ready', hasFront && compiled);
+    };
     const reducedMotion = window.matchMedia?.('(prefers-reduced-motion: reduce)').matches ?? false;
 
     const paintFaces = () => {
@@ -1029,8 +1037,8 @@ const Lanyard = ({
           images.front = front;
           images.back = back;
           images.strap = strap;
-          if (front) container.classList.add('lanyard-ready');
-          else container.classList.remove('lanyard-ready');
+          hasFront = !!front;
+          syncReady();
           paintFaces();
           repaintStrap();
         });
@@ -1149,6 +1157,7 @@ const Lanyard = ({
     };
 
     const render = () => {
+      if (!compiled) return;
       cardGroup.position.copy(sim.body.position);
       cardGroup.quaternion.copy(sim.body.quaternion);
       updateBand();
@@ -1201,7 +1210,7 @@ const Lanyard = ({
     };
 
     const start = () => {
-      if (raf || !visible || !alive) return;
+      if (raf || !visible || !alive || !compiled) return;
       sim.calm = 0;
       last = performance.now();
       raf = requestAnimationFrame(tick);
@@ -1320,6 +1329,16 @@ const Lanyard = ({
 
     applyRef.current = apply;
     resize();
+    if (!compiled) {
+      const finishCompile = () => {
+        if (!alive) return;
+        compiled = true;
+        syncReady();
+        render();
+        start();
+      };
+      renderer.compileAsync(scene, camera).then(finishCompile, finishCompile);
+    }
 
     return () => {
       alive = false;

@@ -17,6 +17,8 @@
     var lastMoveTime = Date.now();
     var isTouchDevice = ('ontouchstart' in window) || (navigator.maxTouchPoints > 0);
     var animId = null;
+    var lastSceneTransform = '';
+    var lastGlowTransform = '';
 
     // Parallax config
     var MAX_TRANSLATE_X = 12;  // px
@@ -79,15 +81,24 @@
       var ry = currentX * MAX_ROTATE_Y;   // yaw follows cursor X
       var rx = -currentY * MAX_ROTATE_X;  // pitch follows cursor Y (inverted)
 
-      scene.style.transform =
+      var sceneTransform =
         'translate3d(' + tx.toFixed(2) + 'px, ' + ty.toFixed(2) + 'px, 0) ' +
         'rotateY(' + ry.toFixed(2) + 'deg) ' +
         'rotateX(' + rx.toFixed(2) + 'deg)';
+      // Only touch the DOM when the formatted value actually changes.
+      if (sceneTransform !== lastSceneTransform) {
+        scene.style.transform = sceneTransform;
+        lastSceneTransform = sceneTransform;
+      }
 
       // Shift the ambient glow slightly toward cursor
       if (glow) {
-        glow.style.transform =
+        var glowTransform =
           'translate3d(' + (currentX * 8).toFixed(1) + '%, ' + (currentY * 5).toFixed(1) + '%, 0)';
+        if (glowTransform !== lastGlowTransform) {
+          glow.style.transform = glowTransform;
+          lastGlowTransform = glowTransform;
+        }
       }
 
       animId = isVisible && !document.hidden ? requestAnimationFrame(animate) : null;
@@ -99,8 +110,29 @@
       }
     }
 
+    // The Spline viewer only uses its own IntersectionObserver for lazy loading;
+    // its WebGL render loop otherwise keeps running after the robot scrolls out
+    // of view. Pause/resume the scene with the runtime's stop()/play() (viewer
+    // version is pinned below). Guarded, so if the API is absent nothing changes.
+    function setSplineRunning(running) {
+      var viewerEl = document.getElementById('spline-robot');
+      var app = viewerEl && viewerEl._spline;
+      if (!app || typeof app.stop !== 'function' || typeof app.play !== 'function') return;
+      try {
+        if (running) {
+          app.play();
+        } else {
+          // play() first so stop() always takes effect, even if the scene's own
+          // load routine restarted the loop while it was flagged as paused.
+          app.play();
+          app.stop();
+        }
+      } catch (err) { /* never let an optimisation break the scene */ }
+    }
+
     function updateVisibility(entries) {
       isVisible = entries[0].isIntersecting;
+      setSplineRunning(isVisible);
       if (!isVisible && animId) {
         cancelAnimationFrame(animId);
         animId = null;
@@ -145,6 +177,9 @@
         }
       }
       viewer.addEventListener('load', function() {
+        // The scene starts its loop on load (after a 0ms timeout); re-apply
+        // the paused state if the robot was scrolled away while loading.
+        setTimeout(function() { if (!isVisible) setSplineRunning(false); }, 50);
         watchBranding();
         setTimeout(nukeSplineBranding, 300);
         setTimeout(nukeSplineBranding, 1000);

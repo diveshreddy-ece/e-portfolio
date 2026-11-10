@@ -196,3 +196,9 @@
     margin-top: 1.5rem;
   }
 }
+
+/* Keep the blurred glow on its own compositor layer: robot.js moves it every
+   frame, and without promotion the 35px blur is re-rasterised each time. */
+#robot-glow {
+  will-change: transform;
+}

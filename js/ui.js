@@ -36,20 +36,37 @@ document.addEventListener('DOMContentLoaded', () => {
   const progress = document.getElementById('scroll-progress');
   const backToTop = document.getElementById('back-to-top');
 
+  // Scroll work is batched into one rAF per frame; layout reads (scrollHeight)
+  // are cached and refreshed only when the page size changes; DOM writes only
+  // happen when a state actually flips.
+  let maxScroll = 0;
+  let lastShrink = null;
+  let lastTop = null;
+  let scrollQueued = false;
+  const doc = document.documentElement;
+
+  function measure() {
+    maxScroll = doc.scrollHeight - doc.clientHeight;
+  }
+
   function onScroll() {
+    scrollQueued = false;
     const y = window.scrollY;
     const shrink = y > 40;
 
-    if (header) header.classList.toggle('shadow-sm', shrink);
-    if (navInner) navInner.style.height = shrink ? '64px' : '84px';
+    if (shrink !== lastShrink) {
+      lastShrink = shrink;
+      if (header) header.classList.toggle('shadow-sm', shrink);
+      if (navInner) navInner.style.height = shrink ? '64px' : '84px';
+    }
 
-    const doc = document.documentElement;
-    const max = doc.scrollHeight - doc.clientHeight;
-    const pct = max > 0 ? y / max : 0;
+    const pct = maxScroll > 0 ? Math.min(y / maxScroll, 1) : 0;
     if (progress) progress.style.transform = `scaleX(${pct})`;
 
-    if (backToTop) {
-      if (y > 480) {
+    const showTop = y > 480;
+    if (backToTop && showTop !== lastTop) {
+      lastTop = showTop;
+      if (showTop) {
         backToTop.classList.remove('opacity-0', 'pointer-events-none', 'translate-y-3');
       } else {
         backToTop.classList.add('opacity-0', 'pointer-events-none', 'translate-y-3');
@@ -57,7 +74,19 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
-  window.addEventListener('scroll', onScroll, { passive: true });
+  function queueScroll() {
+    if (!scrollQueued) {
+      scrollQueued = true;
+      requestAnimationFrame(onScroll);
+    }
+  }
+
+  measure();
+  window.addEventListener('scroll', queueScroll, { passive: true });
+  window.addEventListener('resize', () => { measure(); queueScroll(); }, { passive: true });
+  if ('ResizeObserver' in window) {
+    new ResizeObserver(() => { measure(); queueScroll(); }).observe(document.body);
+  }
   onScroll();
 
   if (backToTop) {

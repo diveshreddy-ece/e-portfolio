@@ -34,6 +34,14 @@ divesh-portfolio/
     └── resume-graphic-design.pdf
 ```
 
+## Performance notes
+
+- `js/nebula-bg.js` renders in two passes: the FBM noise field is evaluated once per 6px halftone cell into a small offscreen texture, then a cheap per-pixel pass draws the dots, stars, vignette and grain. Output matches the original single-pass shader (kept as an automatic fallback). Shaders compile in the background via `KHR_parallel_shader_compile`.
+- The Spline robot's render loop is paused while its section is off-screen and resumed when it returns (`js/robot.js`).
+- React, ReactDOM, three.js and `js/lanyard.js` are injected as ordered `async=false` scripts so they no longer block first paint or `DOMContentLoaded`; the lanyard compiles its shaders with `renderer.compileAsync`.
+- The custom cursor moves with `transform`, sleeps when settled, and caches section bounds. Hero letter positions are cached in document coordinates. Scroll-driven UI updates are batched per animation frame.
+- Avoid adding Tailwind class names (e.g. "rounded") to comments in `js/`: Tailwind scans those files and would generate the class.
+
 ## Notes
 
 - Cloudinary videos and matching poster frames are loaded as they approach the viewport; video delivery is capped to the displayed dimensions.
