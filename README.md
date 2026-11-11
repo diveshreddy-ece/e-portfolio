@@ -1,38 +1,67 @@
 # Divesh Reddy — Portfolio
 
-A responsive single-page portfolio built with HTML, generated Tailwind CSS, and vanilla JavaScript.
+A responsive single-page portfolio built with HTML, generated Tailwind CSS, and vanilla JavaScript, bundled with Vite.
 
-## Run locally in VS Code
-
-1. Extract/open this folder in VS Code.
-2. Install the **Live Server** extension.
-3. Right-click `index.html` and choose **Open with Live Server**.
-
-You can also run a local server from this folder:
+## Run locally
 
 ```bash
-python3 -m http.server 5500
+npm install
+npm run dev
 ```
 
-Then open http://localhost:5500.
+Then open the URL Vite prints (usually http://localhost:5173).
 
-The generated Tailwind stylesheet is checked in, so Live Server does not need a build step. After changing Tailwind classes or the theme, run `npm install` once and then `npm run build:css`.
+The generated Tailwind stylesheet (`css/tailwind.generated.css`) is checked in, so any static server (for example VS Code's Live Server, or `python3 -m http.server 5500`) also works without a build step. After changing Tailwind classes or the theme, run `npm run build:css`.
 
-For a production bundle, run `npm install` and `npm run build`. The build minifies and copies the standalone scripts and resume PDFs into `dist/`. To run Lighthouse against the production output, run `npm run preview` and audit http://localhost:4173 rather than the Vite development server. TypeScript checks for the separate UI components are available with `npm run typecheck`.
+## Build and deploy
+
+```bash
+npm run build
+```
+
+This regenerates the Tailwind CSS, bundles the page into `dist/`, and copies and minifies `js/` and `assets/` alongside it. `dist/` is not committed; let the host build it:
+
+| Host | Build command | Output directory |
+| --- | --- | --- |
+| Vercel / Netlify / Cloudflare Pages | `npm run build` | `dist` |
+
+To run Lighthouse against the production output, run `npm run preview` and audit http://localhost:4173 rather than the dev server.
+
+Once the site has a domain, add `og:url` and an `og:image` (absolute URLs) to the link-preview tags in `index.html`.
 
 ## Project structure
 
 ```text
 divesh-portfolio/
-├── index.html
-├── tailwind.config.cjs
-├── README.md
+├── index.html               # page markup
+├── vite.config.mjs          # build: copies + minifies js/ and assets/ into dist/
+├── tailwind.config.cjs      # theme colours (navy, vlsi, lead, vid, ink, line, surface)
 ├── css/
-│   └── tailwind.generated.css
+│   ├── tailwind.css             # Tailwind entry
+│   ├── tailwind.generated.css   # generated, checked in
+│   ├── nebula-theme.css         # dark nebula theme overrides
+│   └── base / typography / components / cursor / explore / lanyard / event-gallery .css
+├── js/
+│   ├── data/portfolio-data.js   # projects, leadership timeline, event gallery content
+│   ├── ui.js                    # navbar, scroll progress, reveal, active nav link
+│   ├── projects.js              # VLSI project cards + modal
+│   ├── leadership.js, event-gallery.js, video.js, explore.js
+│   ├── nebula-bg.js             # WebGL halftone background
+│   ├── lanyard.js               # 3D lanyard (React + three.js from CDN)
+│   └── robot.js, cursor.js, hero-proximity.js
 └── assets/
+    ├── favicon.svg
     ├── resume-rtl-design.pdf
     └── resume-graphic-design.pdf
 ```
+
+## Colour classes
+
+The site is dark-only. Use the theme tokens rather than Tailwind's default light palette:
+
+- Text: `text-white`, `text-ink-bright`, `text-ink-soft`, `text-ink-muted`, `text-ink-faint`
+- Borders: `border-line`
+- Panels: `bg-surface`, `bg-surface-raised`
 
 ## Performance notes
 
@@ -45,7 +74,6 @@ divesh-portfolio/
 ## Notes
 
 - Cloudinary videos and matching poster frames are loaded as they approach the viewport; video delivery is capped to the displayed dimensions.
-- The Spline viewer loads as its section approaches the viewport.
-- Resume PDFs are stored locally in `assets/`.
-- The design uses a dark engineering/creative visual direction with responsive layouts and motion that respects reduced-motion preferences.
+- The Spline viewer loads from a CDN as its section approaches the viewport.
+- Motion respects reduced-motion preferences.
 - Verify all project descriptions, internship dates, contact details, and social links before publishing.

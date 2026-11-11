@@ -136,51 +136,19 @@ video {
 .text-vlsi-600 { color: #ff7098 !important; }
 .text-vlsi-500 { color: #ff1f5a !important; }
 
-/* ── High Contrast Nebula Typography ── */
-.text-navy-900,
-.text-slate-800,
-.text-slate-700,
-.text-slate-100,
+/* ── High Contrast Nebula Typography ──
+   Text, border and panel colours come from the ink / line / surface
+   tokens in tailwind.config.cjs. */
 .text-white {
   color: #ffffff !important;
-}
-
-.text-slate-600,
-.text-slate-500,
-.text-navy-900\/60,
-.text-navy-900\/70 {
-  color: rgba(246, 226, 232, 0.75) !important;
-}
-
-.text-slate-400 {
-  color: rgba(246, 226, 232, 0.55) !important;
-}
-
-.text-slate-200 {
-  color: rgba(246, 226, 232, 0.90) !important;
-}
-
-.text-slate-300 {
-  color: rgba(246, 226, 232, 0.78) !important;
 }
 
 p {
   color: var(--muted);
 }
 
-.border-slate-100,
-.border-slate-200,
-.border-navy-900\/10,
 .border-t {
   border-color: rgba(255, 31, 90, 0.15) !important;
-}
-
-.bg-white {
-  background: rgba(14, 5, 18, 0.92) !important;
-}
-
-.bg-slate-50 {
-  background: rgba(28, 8, 28, 0.82) !important;
 }
 
 /* ── Quick Stat Pills ── */
@@ -201,7 +169,7 @@ p {
 
 /* ── Footer ── */
 footer {
-  background: rgba(5, 3, 9, 0.9) !important;
+  background: rgba(14, 5, 18, 0.92) !important;
   border-color: rgba(255, 31, 90, 0.15) !important;
 }
 

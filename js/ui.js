@@ -97,7 +97,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
   /* ---------- Active Navigation Observer ---------- */
   const navLinks = Array.from(document.querySelectorAll('.nav-link'));
-  const trackedSections = ['about', 'vlsi', 'leadership', 'video']
+  // home and contact have no nav link: tracking them clears the highlight there.
+  const trackedSections = ['home', 'about', 'vlsi', 'leadership', 'video', 'contact']
     .map(id => document.getElementById(id))
     .filter(Boolean);
 

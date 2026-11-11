@@ -1,7 +1,6 @@
 module.exports = {
   content: [
     './index.html',
-    './index-lanyard-photo (1).html',
     './js/**/*.js'
   ],
   theme: {
@@ -11,6 +10,17 @@ module.exports = {
         mono: ['JetBrains Mono', 'monospace']
       },
       colors: {
+        ink: {
+          bright: 'rgba(246, 226, 232, 0.90)',
+          soft: 'rgba(246, 226, 232, 0.78)',
+          muted: 'rgba(246, 226, 232, 0.75)',
+          faint: 'rgba(246, 226, 232, 0.55)'
+        },
+        line: 'rgba(255, 31, 90, 0.15)',
+        surface: {
+          DEFAULT: 'rgba(14, 5, 18, 0.92)',
+          raised: 'rgba(28, 8, 28, 0.82)'
+        },
         navy: {
           DEFAULT: '#050309',
           950: '#030206',
