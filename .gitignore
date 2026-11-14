@@ -1,3 +1,17 @@
 node_modules/
 .DS_Store
 dist/
+
+# Full-resolution source videos (too large for git). The web copies the site uses
+# live in assets/freelance/ and assets/projects/.
+/source-videos/
+
+# AI coding-tool installs and local settings (reinstallable via skills-lock.json; not part of the site)
+/.agent/
+/.agents/
+/.claude/
+/.codex/
+/.cursor/
+/.gemini/
+/.opencode/
+/.impeccable/

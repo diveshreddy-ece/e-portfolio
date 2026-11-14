@@ -1,151 +1,80 @@
 /**
- * Core UI & Navigation Interactions
- * Handles navbar state transitions, scroll progress, reveal animations, and mobile drawer.
+ * Core UI: mobile drawer, back-to-top, and the active track in the pass strip.
  */
 document.addEventListener('DOMContentLoaded', () => {
-  const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const reducedMQ = window.matchMedia('(prefers-reduced-motion: reduce)'); // read live
+  const root = document.documentElement;
 
-  /* ---------- Mobile Menu Drawer ---------- */
+  /* ---------- Mobile drawer ---------- */
   const menuBtn = document.getElementById('menu-btn');
-  const mobileMenu = document.getElementById('mobile-menu');
+  const drawer = document.getElementById('mobile-menu');
   const openIcon = document.getElementById('menu-icon-open');
   const closeIcon = document.getElementById('menu-icon-close');
 
-  if (menuBtn && mobileMenu) {
-    menuBtn.addEventListener('click', () => {
-      const isOpen = !mobileMenu.classList.contains('hidden');
-      mobileMenu.classList.toggle('hidden');
-      if (openIcon) openIcon.classList.toggle('hidden', !isOpen);
-      if (closeIcon) closeIcon.classList.toggle('hidden', isOpen);
-      menuBtn.setAttribute('aria-expanded', String(!isOpen));
-    });
+  const setDrawer = (open) => {
+    if (!menuBtn || !drawer) return;
+    drawer.classList.toggle('hidden', !open);
+    openIcon?.classList.toggle('hidden', open);
+    closeIcon?.classList.toggle('hidden', !open);
+    menuBtn.setAttribute('aria-expanded', String(open));
+    menuBtn.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+  };
 
-    mobileMenu.querySelectorAll('a').forEach(a => {
-      a.addEventListener('click', () => {
-        mobileMenu.classList.add('hidden');
-        if (openIcon) openIcon.classList.remove('hidden');
-        if (closeIcon) closeIcon.classList.add('hidden');
-        menuBtn.setAttribute('aria-expanded', 'false');
-      });
-    });
-  }
+  menuBtn?.addEventListener('click', () => setDrawer(drawer.classList.contains('hidden')));
+  drawer?.querySelectorAll('a').forEach((a) => a.addEventListener('click', () => setDrawer(false)));
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && drawer && !drawer.classList.contains('hidden')) {
+      setDrawer(false);
+      menuBtn?.focus();
+    }
+  });
+  window.matchMedia('(min-width: 861px)').addEventListener?.('change', (e) => { if (e.matches) setDrawer(false); });
 
-  /* ---------- Navbar Scroll Dynamics & Progress ---------- */
-  const header = document.getElementById('site-header');
-  const navInner = document.getElementById('nav-inner');
-  const progress = document.getElementById('scroll-progress');
+  /* ---------- Back to top ---------- */
   const backToTop = document.getElementById('back-to-top');
-
-  // Scroll work is batched into one rAF per frame; layout reads (scrollHeight)
-  // are cached and refreshed only when the page size changes; DOM writes only
-  // happen when a state actually flips.
-  let maxScroll = 0;
-  let lastShrink = null;
-  let lastTop = null;
-  let scrollQueued = false;
-  const doc = document.documentElement;
-
-  function measure() {
-    maxScroll = doc.scrollHeight - doc.clientHeight;
-  }
-
-  function onScroll() {
-    scrollQueued = false;
-    const y = window.scrollY;
-    const shrink = y > 40;
-
-    if (shrink !== lastShrink) {
-      lastShrink = shrink;
-      if (header) header.classList.toggle('shadow-sm', shrink);
-      if (navInner) navInner.style.height = shrink ? '64px' : '84px';
+  let shown = false;
+  let queued = false;
+  const onScroll = () => {
+    queued = false;
+    const show = window.scrollY > 640;
+    if (show !== shown && backToTop) {
+      shown = show;
+      backToTop.classList.toggle('is-shown', show);
     }
-
-    const pct = maxScroll > 0 ? Math.min(y / maxScroll, 1) : 0;
-    if (progress) progress.style.transform = `scaleX(${pct})`;
-
-    const showTop = y > 480;
-    if (backToTop && showTop !== lastTop) {
-      lastTop = showTop;
-      if (showTop) {
-        backToTop.classList.remove('opacity-0', 'pointer-events-none', 'translate-y-3');
-      } else {
-        backToTop.classList.add('opacity-0', 'pointer-events-none', 'translate-y-3');
-      }
-    }
-  }
-
-  function queueScroll() {
-    if (!scrollQueued) {
-      scrollQueued = true;
-      requestAnimationFrame(onScroll);
-    }
-  }
-
-  measure();
-  window.addEventListener('scroll', queueScroll, { passive: true });
-  window.addEventListener('resize', () => { measure(); queueScroll(); }, { passive: true });
-  if ('ResizeObserver' in window) {
-    new ResizeObserver(() => { measure(); queueScroll(); }).observe(document.body);
-  }
+  };
+  window.addEventListener('scroll', () => {
+    if (!queued) { queued = true; requestAnimationFrame(onScroll); }
+  }, { passive: true });
   onScroll();
+  backToTop?.addEventListener('click', () => {
+    window.scrollTo({ top: 0, behavior: reducedMQ.matches ? 'auto' : 'smooth' });
+    document.getElementById('home')?.focus?.({ preventScroll: true });
+  });
 
-  if (backToTop) {
-    backToTop.addEventListener('click', () => {
-      window.scrollTo({ top: 0, behavior: reduced ? 'auto' : 'smooth' });
-    });
-  }
-
-  /* ---------- Active Navigation Observer ---------- */
+  /* ---------- Active section: nav highlight + strip colour ---------- */
   const navLinks = Array.from(document.querySelectorAll('.nav-link'));
-  // home and contact have no nav link: tracking them clears the highlight there.
-  const trackedSections = ['home', 'about', 'vlsi', 'leadership', 'video', 'contact']
-    .map(id => document.getElementById(id))
+  const zones = { vlsi: 'vlsi', leadership: 'crew', work: 'work', video: 'media' };
+  const sections = ['home', 'about', 'vlsi', 'leadership', 'work', 'projects', 'video', 'contact']
+    .map((id) => document.getElementById(id))
     .filter(Boolean);
 
-  if ('IntersectionObserver' in window && trackedSections.length) {
-    const navObserver = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          navLinks.forEach(l => l.classList.toggle('active', l.dataset.section === entry.target.id));
-        }
+  if ('IntersectionObserver' in window && sections.length) {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+        const id = entry.target.id;
+        navLinks.forEach((link) => {
+          const on = link.dataset.section === id;
+          link.classList.toggle('active', on);
+          if (on) link.setAttribute('aria-current', 'location');
+          else link.removeAttribute('aria-current');
+        });
+        if (zones[id]) root.dataset.zone = zones[id];
+        else delete root.dataset.zone;
       });
-    }, { rootMargin: '-20% 0px -60% 0px', threshold: 0 });
-
-    trackedSections.forEach(s => navObserver.observe(s));
+    }, { rootMargin: '-35% 0px -60% 0px', threshold: 0 });
+    sections.forEach((s) => observer.observe(s));
   }
 
-  /* ---------- Reveal-on-Scroll Observer ---------- */
-  if (reduced) {
-    document.querySelectorAll('.reveal').forEach(el => el.classList.add('in-view'));
-  } else if ('IntersectionObserver' in window) {
-    const revealObserver = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('in-view');
-          revealObserver.unobserve(entry.target);
-        }
-      });
-    }, { threshold: 0.15 });
-
-    document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
-  }
-
-  /* ---------- VLSI Silicon Flow Line Animation ---------- */
-  const flowLine = document.getElementById('flow-line');
-  const flowContainer = document.getElementById('vlsi-flow');
-
-  if (!reduced && flowLine && flowContainer && 'IntersectionObserver' in window) {
-    const flowObserver = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          flowLine.classList.add('draw');
-          flowObserver.disconnect();
-        }
-      });
-    }, { threshold: 0.4 });
-
-    flowObserver.observe(flowContainer);
-  } else if (flowLine) {
-    flowLine.classList.add('draw');
-  }
+  // The VLSI flow rail is drawn by js/scroll-fx.js as part of the signal trace.
 });

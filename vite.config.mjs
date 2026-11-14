@@ -1,5 +1,5 @@
 import { cp, readFile, readdir, writeFile } from 'node:fs/promises';
-import { join } from 'node:path';
+import { join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { defineConfig, minify } from 'vite';
 
@@ -23,14 +23,24 @@ async function minifyScripts(directory) {
 }
 
 export default defineConfig({
-  plugins: [{
-    name: 'copy-static-portfolio-files',
-    apply: 'build',
-    async closeBundle() {
-      await Promise.all(['js', 'assets'].map((directory) =>
-        cp(`${root}${directory}`, `${root}dist/${directory}`, { recursive: true })
-      ));
-      await minifyScripts(`${root}dist/js`);
-    }
-  }]
+  // Relative URLs so the build works from the domain root or from a subfolder
+  // (e.g. a GitHub Pages project site). The page's own scripts already use relative paths.
+  base: './',
+  plugins: [(() => {
+    let outDir = resolve(root, 'dist');
+    return {
+      name: 'copy-static-portfolio-files',
+      apply: 'build',
+      // Follow the resolved build.outDir (so `vite build --outDir x` is respected).
+      configResolved(config) {
+        outDir = resolve(config.root, config.build.outDir);
+      },
+      async closeBundle() {
+        await Promise.all(['js', 'assets'].map((directory) =>
+          cp(join(root, directory), join(outDir, directory), { recursive: true })
+        ));
+        await minifyScripts(join(outDir, 'js'));
+      }
+    };
+  })()]
 });
