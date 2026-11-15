@@ -47,7 +47,7 @@ Range is the point. Divesh is genuinely multi-disciplinary: hardware design, bui
 
 ## Evidence on Hand
 
-- **VLSI / embedded projects** (`js/data/portfolio-data.js`): UART TX/RX and 4-bit ALU (public repos, with simulation waveforms in `assets/vlsi/`), Smart Radar System (Arduino), 6 DOF Robotic Arm.
+- **VLSI / embedded projects** (`js/data/portfolio-data.js`): UART TX/RX, Traffic Light Controller and 4-bit ALU (public repos, with simulation waveforms in `assets/vlsi/`), Smart Radar System (Arduino), 6 DOF Robotic Arm.
 - **Leadership / events** (Digital Nexus): Arduino Workshop, Flyer Making Competition, C-Race, Startup Autopsy, IOTvate, Creovate, and other technical events; event gallery photos on Cloudinary.
 - **Freelancing** (section `#work`, films in `assets/freelance/`; personal project films in `assets/projects/`). *Client work:* VENOMOS, VenoPatch Medical Technology Ecosystem (Healthcare / MedTech, 2026): website, React Native app and launch film; live site on a temporary `tmp.now` URL. Brainy Circuits, Virtual Arduino Lab (EdTech, 2026): 2:43 launch ad for brainycircuits.com; tools not yet confirmed. **Projects** (section `#projects`; personal work, never presented as freelance or client work; each card links to its GitHub repo; the repos were still private on 2026-11-15, so the links 404 for visitors until made public): Agrinex (smart urban farming dashboard, live at agrinex-eight.vercel.app), Seekora (offline semantic file search; its DriveCore FPGA part is not built yet, so it is not claimed), EcoLens (AI waste classifier), Assignment Portal (uploads with emailed confirmation codes).
 - **Video**: one featured edit plus five shorts (Elevate Yourself, Video Edit, Sir Lewis Hamilton, Mad Maxxx, El Clásico), hosted on Cloudinary.

@@ -53,7 +53,7 @@ divesh-portfolio/
 │   ├── fonts/                   # self-hosted Barlow, Barlow Condensed, JetBrains Mono (woff2)
 │   ├── freelance/               # client films + posters (Freelancing section)
 │   ├── projects/                # personal project films + posters (Projects section)
-│   ├── vlsi/                    # UART and ALU simulation waveforms
+│   ├── vlsi/                    # UART, traffic light and ALU simulation waveforms
 │   ├── embedded/                # build photos: robotic arm, smart radar
 │   ├── leadership/              # event photos and the Creovate award
 │   ├── favicon.svg
