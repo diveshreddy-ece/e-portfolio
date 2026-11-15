@@ -12,7 +12,7 @@
   const escape = (value) => String(value).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
   const isEmbedded = (p) => p.tags.includes('Arduino');
   // Most advanced digital work first; embedded builds after.
-  const digitalOrder = ['UART Transmitter & Receiver', '4-bit ALU'];
+  const digitalOrder = ['UART Transmitter & Receiver', 'Traffic Light Controller', '4-bit ALU'];
   const rank = (p) => { const i = digitalOrder.indexOf(p.name); return i === -1 ? digitalOrder.length : i; };
   const digital = data.filter((p) => !isEmbedded(p))
     .sort((a, b) => rank(a) - rank(b));

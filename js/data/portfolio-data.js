@@ -20,6 +20,21 @@ const vlsiProjects = [
     repo: "https://github.com/diveshreddy-ece/uart-verilog"
   },
   {
+    name: "Traffic Light Controller",
+    tags: ["Verilog", "Moore FSM", "Timer"],
+    blurb: "A two-road traffic light controller built as a four-state Moore FSM with a parameterised timer, checked cycle by cycle.",
+    problem: "Hand right of way back and forth between the North-South and East-West roads with exact green and yellow times, and never show green to both roads.",
+    architecture: "Four states (NS green, NS yellow, EW green, EW yellow) with combinational next-state and output logic and a single clocked block for the state and timer. Clock frequency, green time and yellow time are parameters; the timer width comes from $clog2 in 64-bit maths, so even 100 MHz × 60 s fits.",
+    implementation: "The timer counts 0 to N-1 and timer_expired marks the last cycle, so the state change and the timer clear land on the same clock edge with no off-by-one. Reset is asynchronous, and the output decoder falls back to all-red.",
+    verification: "A self-checking testbench checks the state, timer and both lamps on every cycle, times each phase from the outputs alone and checks safety on every output change, across 3 full loops, a reset mid-green and a 2 ns reset pulse: 256/256 cycle checks passed, and it passes at 3 more parameter sets. Planting 10 known bugs, it caught 8; the other 2 (blocking assignments) need a lint tool.",
+    learning: "Non-blocking assignments are what keep the timer and the state in step, and a testbench is only trustworthy once it has been shown to fail on planted bugs.",
+    waveforms: [
+      { src: "assets/vlsi/traffic-light-waveform.png", width: 2560, height: 702, thumb: { src: "assets/vlsi/traffic-light-waveform-card.webp", width: 800, height: 219 }, caption: "Full run: three complete cycles, a reset in the middle of East-West green, then a 2 ns reset pulse", alt: "Simulation waveform of the traffic light controller: the state steps S0, S1, S2, S3 repeatedly, North-South and East-West lamps alternate green, yellow and red without ever both being green, the timer ramps up in each state, and two resets return the lights to North-South green." },
+      { src: "assets/vlsi/traffic-light-waveform-zoom.png", width: 2560, height: 776, caption: "The S0 to S1 edge: timer_expired is high for the last cycle, then the state and timer change on the same clock edge", alt: "Zoomed simulation waveform around 145 ns: timer_count counts 7 to 11 while state_duration is 11, timer_expired goes high for one cycle, and on the next rising clock edge the state changes from S0 to S1, the timer returns to 0 and North-South turns from green to yellow." }
+    ],
+    repo: "https://github.com/diveshreddy-ece/traffic-light-controller-verilog"
+  },
+  {
     name: "4-bit ALU",
     tags: ["Verilog", "Combinational", "Exhaustive TB"],
     blurb: "A combinational 4-bit ALU with eight operations and carry and zero flags, checked against every possible input.",
